@@ -13,6 +13,7 @@
 #define __TH_H__
 
 typedef struct Element2p{
+    struct Element2p* prec;
     int cle;
     struct Element2p* succ;
 } Element2p;
