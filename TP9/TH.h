@@ -17,7 +17,7 @@ typedef struct Element2p{
     struct Element2p* succ;
 } Element2p;
 
-typedef Element2p* TH;
+typedef Element2p* TH ;
 
 void TH_creer(TH*);
 
