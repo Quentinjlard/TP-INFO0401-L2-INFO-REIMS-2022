@@ -37,12 +37,17 @@ void TH_inserer(TH *x, int cle)
     Element2p* pelem;
 	pelem=(Element2p*)malloc(sizeof(Element2p));
 	pelem->cle=cle;
-	pelem->succ = *x;
 
-	if ( ! TH_vide(*x) )
-		(*x)->succ = pelem;
+   
+	if (! TH_vide(*x))
+    {
+     	(*x)->succ = pelem;
 
-	*x = pelem; 
+    }
+    else
+    {
+        *x = pelem; 
+    }    
 }
 
 void TH_supprimer(TH *x,Element2p* p)

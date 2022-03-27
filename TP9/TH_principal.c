@@ -28,9 +28,11 @@ void afficher(TH x)
 	Element2p * p = x;
 	printf("contenu : \t");
 	while ( p != NULL )
-	{	printf("%d\t", p->cle);
+	{	
+		printf("%d\t", p->cle);
 		p = p->succ;
 	}
+	printf("NULL");
 	printf("\n");
 }
 
@@ -54,20 +56,20 @@ int main(void)
 debug("creation OK");	
 	afficher(x);
 debug("affichage a vide OK");	
-	TH_inserer(&x, 5141);
-	afficher(x);
+ 	TH_inserer(&x, 5141);
+ 	afficher(x);
 debug("aff apres insertion 5141 (OK ?)");	
-	TH_inserer(&x, 8520);
-	afficher(x);
+ 	TH_inserer(&x, 8520);
+ 	afficher(x);
 debug("aff apres insertion 8520 (OK ?)");	
 	for(i=3; i<=4 ; i++)
-{
-	TH_inserer(&x, 340*i);
-	afficher(x);
+ 	{
+ 		TH_inserer(&x, 340*i);
+  		afficher(x);
 debug("OK (?) apres chacune des 2 nouvelles insertions");	
-}
+ 	}
 
-debug("=====================");	
+debug("\n\n=====================\n=====================\n\n");	
 debug("recherche de 0");	
 	p = TH_rechercher(x, 0); printf("%p\n", p);
 debug("recherche de 1020");	
@@ -78,13 +80,13 @@ debug("affichage apres suppression de 1020");
 	afficher(x);
 
 debug("ajout de 11 et 41 : ");	
-	TH_inserer(&x, 11);
-	TH_inserer(&x, 41);
-	afficher(x);
+ 	TH_inserer(&x, 11);
+ 	TH_inserer(&x, 41);
+ 	afficher(x);
 	
-debug("on vide :");	
-	vider(&x);
-	afficher(x);
+// debug("on vide :");	
+// 	vider(&x);
+// 	afficher(x);
 
 	return 0;
 }
