@@ -1,4 +1,14 @@
-
+/**
+ * @file LR.c
+ * @author JUILLIARD Quentin
+ * @author COGNE Romain
+ * @brief 
+ * @version 0.1
+ * @date 2022-03-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "LR.h"
 
 #include <stdio.h>

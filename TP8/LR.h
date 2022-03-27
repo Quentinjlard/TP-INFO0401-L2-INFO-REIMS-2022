@@ -1,3 +1,15 @@
+/**
+ * @file LR.h
+ * @author JUILLIARD Quentin
+ * @author COGNE Romain
+ * @brief 
+ * @version 0.1
+ * @date 2022-03-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #ifndef __LR_H__
 #define __LR_H__
 

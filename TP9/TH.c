@@ -1,4 +1,13 @@
-
+/**
+ * @file TH.c
+ * @author JUILLIARD Quentin
+ * @brief 
+ * @version 0.1
+ * @date 2022-03-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "TH.h"
 
 #include <stdio.h>
@@ -16,7 +25,7 @@ void TH_creer(TH* px)
 
 int TH_vide(TH x)
 {
-
+    return (x == NULL);
 }
 
 Element2p* TH_rechercher(TH x, int cle)
