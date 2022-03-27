@@ -13,13 +13,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX 10000
+
 void TH_creer(TH* px)
 {
-    Element2p* e = px;
-    int taille = e->val;
+    TH* tableHachage[MAX];
 
-    for (int i = 0; i<taille ; i++)
-        *px = NULL;
+    for (int i = 0; i < MAX; i)
+    {
+        TH elem2p = NULL;
+        tableHachage[i] = elem2p;
+    }
 }
 
 
@@ -30,15 +34,43 @@ int TH_vide(TH x)
 
 Element2p* TH_rechercher(TH x, int cle)
 {
-
-}
-
-void TH_supprimer(TH *x,Element2p* p)
-{
-    
+    Element2p* pos = x;
+	while ( pos != NULL && pos->cle != cle )
+		pos = pos->succ;
+	return pos;
 }
 
 void TH_inserer(TH *x, int cle)
 {
+    int k = cle;
+    int i = 0;
+    do
+    {
+        if (x[i] == NULL)
+        {
+            x[i] = cle;
+            return x;
+        }
+        else
+        {
+            i ++;
+        }
+    } while (i = MAX);
+    printf("Plus de place"); 
+}
 
+void TH_supprimer(TH *x,Element2p* p)
+{
+    if (p == NULL)
+		return;
+
+    Element2p* e = p ;
+
+    if(p->succ != NULL) //il y a qqn a D
+	{
+		e = p->succ;	// son pred est le mien
+	}  
+
+    // liberation memoire
+	free(p);
 }
