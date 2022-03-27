@@ -39,7 +39,7 @@ void TH_inserer(TH *x, int cle)
 	pelem->cle=cle;
 	pelem->succ = *x;
 
-	if ( ! LR_vide(*x) )
+	if ( ! TH_vide(*x) )
 		(*x)->succ = pelem;
 
 	*x = pelem; 
@@ -50,12 +50,26 @@ void TH_supprimer(TH *x,Element2p* p)
     if (p == NULL)
 		return;
 
+
     Element2p* e = p ;
 
-    if(p->succ != NULL) //il y a qqn a D
+// partie gauche-droite
+	if (p->succ == NULL) { // 1er
+		e = p->succ;	// mon succeseur
+		// e == NULL ?
+		// pb si e==NULL, pour e->prec
+		*x = e;
+	}
+	else{ // il y a qqn a G
+		// a D de mon predecesseur il y a mon successeur
+		e->succ = p->succ;
+	}  
+
+// partie droite-gauche
+	if(p->succ != NULL) //il y a qqn a D
 	{
 		e = p->succ;	// son pred est le mien
-	}  
+	}
 
     // liberation memoire
 	free(p);
