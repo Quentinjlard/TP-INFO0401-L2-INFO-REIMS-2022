@@ -19,9 +19,9 @@ void TH_creer(TH* px)
 {
     TH* tableHachage[MAX];
 
-    for (int i = 0; i < MAX; i)
+    for (int i = 0; i < MAX; i++)
     {
-        TH elem2p = NULL;
+        TH* elem2p = NULL;
         tableHachage[i] = elem2p;
     }
 }
@@ -42,7 +42,6 @@ Element2p* TH_rechercher(TH x, int cle)
 
 void TH_inserer(TH *x, int cle)
 {
-    int k = cle;
     int i = 0;
     do
     {
