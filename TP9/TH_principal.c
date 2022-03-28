@@ -6,6 +6,7 @@
  */
 
 #include "TH.h"
+#include "LR.h"
 #include <stdlib.h>
 #include <stdio.h>
 

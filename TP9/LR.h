@@ -1,6 +1,7 @@
 /**
- * @file TH.c
+ * @file LR.h
  * @author JUILLIARD Quentin
+ * @author COGNE Romain
  * @brief 
  * @version 0.1
  * @date 2022-03-27
@@ -9,11 +10,8 @@
  * 
  */
 
-#ifndef __TH_H__
-#define __TH_H__
-
-#define MAX 10
-
+#ifndef __LR_H__
+#define __LR_H__
 
 typedef struct Element2p{
     struct Element2p* prec;
@@ -23,18 +21,19 @@ typedef struct Element2p{
 
 typedef Element2p* LR;
 
-typedef struct TH{
-    LR LR[MAX];
-} TH ;
+/*  typedef  struct { 
+        Element2p* Debut;
+    } LR;
+*/
 
-void TH_creer(TH*);
+void LR_creer(LR*);
 
-void TH_inserer(TH*, int);
+void LR_inserer(LR*, int);
 
-void TH_supprimer(TH*,Element2p*);
+void LR_supprimer(LR*,Element2p*);
 
-Element2p* TH_rechercher(TH,int);
+Element2p* LR_rechercher(LR,int);
 
-int TH_vide(TH);
+int LR_vide(LR);
 
 #endif
