@@ -70,8 +70,14 @@ Element2p* TH_rechercher(TH t, int cle)
 
 void TH_inserer(TH *t, int cle)
 {
-	int indice = LR_rechercher( t , cle);
-	LR_inserer(t, cle);
+
+	int indice = NULL;
+	int i =0;
+	do
+	{
+		indice = LR_rechercher( t[i] , cle);
+	} while (i==MAX || indice != NULL );
+	LR_inserer(indice, cle);
 	// int i = 0;
 	// int j;
 	// do
