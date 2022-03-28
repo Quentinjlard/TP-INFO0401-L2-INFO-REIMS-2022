@@ -48,7 +48,7 @@ Element2p* TH_rechercher(TH x, int cle)
 		j = hachage(cle);
 		if(x[j] != NULL)
 		{
-			Element2p* pos = x;
+			Element2p* pos = *x;
 			while ( pos != NULL && pos->cle != cle )
 				pos = pos->succ;
 			return pos;
@@ -74,7 +74,7 @@ void TH_inserer(TH *x, int cle)
 			pelem=(Element2p*)malloc(sizeof(Element2p));
 			*x[j] = pelem->prec;
 			pelem->cle=cle;
-			pelem->succ = *x;
+			pelem->succ = NULL;
 			
 		}
 		else 
@@ -85,7 +85,7 @@ void TH_inserer(TH *x, int cle)
 				pelem=(Element2p*)malloc(sizeof(Element2p));
 				pelem->prec=NULL;
 				pelem->cle=cle;
-				pelem->succ = *x;
+				pelem->succ = NULL;
 			}
 			else
 			{
