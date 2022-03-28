@@ -14,23 +14,85 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void TH_creer(TH* px)
+int hachage(int cle)
 {
+	return 1+ cle%MAX;
 }
 
+void TH_creer(TH* th)
+{
+	LR *px = NULL;
+	for(int i=0; i<MAX; i++)
+	{
+		*th[i] = *px;
+	}
+}
 
 int TH_vide(TH x)
 {
+	int caseVide = 0;
+	for(int i=0; i<MAX; i++)
+	{
+		x[i] == NULL ? caseVide  : caseVide++; 
+	}
+
+	return (caseVide==10);
 }
 
 Element2p* TH_rechercher(TH x, int cle)
 {
-
+	int i = 0;
+	int j;
+	do
+	{
+		j = hachage(cle);
+		if(x[j] != NULL)
+		{
+			Element2p* pos = x;
+			while ( pos != NULL && pos->cle != cle )
+				pos = pos->succ;
+			return pos;
+		}
+		else
+		{
+			i++;
+		}
+	} while (x[j] == NULL || i == MAX);
+	return NULL;
 }
 
 void TH_inserer(TH *x, int cle)
 {
-
+	int i = 0;
+	int j;
+	do
+	{
+		j = hachage(cle);
+		if(x[j] != NULL)
+		{
+			Element2p* pelem;
+			pelem=(Element2p*)malloc(sizeof(Element2p));
+			*x[j] = pelem->prec;
+			pelem->cle=cle;
+			pelem->succ = *x;
+			
+		}
+		else 
+		{
+			if(x[j] == NULL)
+			{
+				Element2p* pelem;
+				pelem=(Element2p*)malloc(sizeof(Element2p));
+				pelem->prec=NULL;
+				pelem->cle=cle;
+				pelem->succ = *x;
+			}
+			else
+			{
+				i++;
+			}
+		}
+	} while (i == MAX);
 }
 
 void TH_supprimer(TH *x,Element2p* p)

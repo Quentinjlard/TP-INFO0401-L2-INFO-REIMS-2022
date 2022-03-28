@@ -13,19 +13,9 @@
 #define __TH_H__
 
 #define MAX 10
+#include "LR.h"
 
-
-typedef struct Element2p{
-    struct Element2p* prec;
-    int cle;
-    struct Element2p* succ;
-} Element2p;
-
-typedef Element2p* LR;
-
-typedef struct TH{
-    LR LR[MAX];
-} TH ;
+typedef LR TH[MAX];
 
 void TH_creer(TH*);
 

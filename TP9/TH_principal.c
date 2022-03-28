@@ -57,18 +57,18 @@ int main(void)
 debug("creation OK");	
 	afficher(x);
 debug("affichage a vide OK");	
- 	TH_inserer(&x, 5141);
- 	afficher(x);
+	TH_inserer(&x, 5141);
+	afficher(x);
 debug("aff apres insertion 5141 (OK ?)");	
- 	TH_inserer(&x, 8520);
- 	afficher(x);
+	TH_inserer(&x, 8520);
+	afficher(x);
 debug("aff apres insertion 8520 (OK ?)");	
 	for(i=3; i<=4 ; i++)
- 	{
- 		TH_inserer(&x, 340*i);
-  		afficher(x);
+	{
+		TH_inserer(&x, 340*i);
+		afficher(x);
 debug("OK (?) apres chacune des 2 nouvelles insertions");	
- 	}
+	}
 
 debug("\n\n=====================\n=====================\n\n");	
 debug("recherche de 0");	
@@ -81,9 +81,9 @@ debug("affichage apres suppression de 1020");
 	afficher(x);
 
 debug("ajout de 11 et 41 : ");	
- 	TH_inserer(&x, 11);
- 	TH_inserer(&x, 41);
- 	afficher(x);
+	TH_inserer(&x, 11);
+	TH_inserer(&x, 41);
+	afficher(x);
 	
 // debug("on vide :");	
 // 	vider(&x);
