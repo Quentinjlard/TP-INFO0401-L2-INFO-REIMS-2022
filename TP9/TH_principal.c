@@ -70,7 +70,9 @@ debug("aff apres insertion 8520 (OK ?)");
 debug("OK (?) apres chacune des 2 nouvelles insertions");	
 	}
 
-debug("\n\n=====================\n=====================\n\n");	
+debug("\n\n+=====================+\n");
+debug("  \n|======RECHERCHE======|\n");
+debug("  \n+=====================+\n");
 debug("recherche de 0");	
 	p = TH_rechercher(x, 0); printf("%p\n", p);
 debug("recherche de 1020");	
@@ -85,9 +87,9 @@ debug("ajout de 11 et 41 : ");
 	TH_inserer(&x, 41);
 	afficher(x);
 	
-// debug("on vide :");	
-// 	vider(&x);
-// 	afficher(x);
+debug("on vide :");	
+	vider(&x);
+	afficher(x);
 
 	return 0;
 }
