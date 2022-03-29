@@ -24,26 +24,31 @@ void debug(char* msg)
 //////////////////////
 // deux fonctions calculables : affichage et vidage
 
-void afficher(TH x)
-{	
-	Element2p * p = x;
-	printf("contenu : \t");
-	while ( p != NULL )
-	{	
-		printf("%d\t", p->cle);
-		p = p->succ;
-	}
-	printf("NULL");
-	printf("\n");
+void afficher(TH t)
+{
+	for (int i = 0; i <MAX;i++)
+	{
+		Element2p* p = t[i];
+		printf("contenu : \t");
+		while ( p != NULL )
+		{	
+			printf("%d\t", p->cle);
+			p = p->succ;
+		}
+			printf("\n");
+	}	
 }
 
 void vider(TH* px)
 {	
-	while( ! TH_vide(*px) )
-	{
-		afficher(*px);
-		TH_supprimer(px, *px);
+	for(int i = 0; i <MAX; i++){
+
+		while( ! LR_vide((*px)[i]) )
+		{
+			LR_supprimer(&((*px)[i]), (*px)[i]);
+		}
 	}
+	
 }
 
 //////////////////////

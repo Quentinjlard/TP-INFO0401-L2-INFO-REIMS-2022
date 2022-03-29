@@ -16,8 +16,7 @@
 
 int hachage(int cle)
 {
-	int max = MAX-1;
-	return cle%max;
+	return cle%MAX;
 }
 
 void TH_creer(TH* pth)
@@ -43,84 +42,32 @@ int TH_vide(TH t)
 	return (i == MAX); // elle est vide si on ne s'est pas arrêtés avant
 }
 
-Element2p* TH_rechercher(TH t, int cle)
+Element2p* TH_rechercher(TH t, int k)
 {
-	int indice = hachage(cle);
-    return LR_rechercher( t[indice] , cle);
+	int indice = hachage(k);
+    return LR_rechercher( t[indice] , k);
 
-	// int i = 0;
-	// int j;
-	// do
-	// {
-	// 	j = hachage(cle);
-	// 	if(x[j] != NULL)
-	// 	{
-	// 		Element2p* pos = *x;
-	// 		while ( pos != NULL && pos->cle != cle )
-	// 			pos = pos->succ;
-	// 		return pos;
-	// 	}
-	// 	else
-	// 	{
-	// 		i++;
-	// 	}
-	// } while (x[j] == NULL || i == MAX);
-	// return NULL;
 }
 
-void TH_inserer(TH *t, int cle)
+void TH_inserer(TH *t, int k)
 {
 
-	int indice = NULL;
-	int i =0;
-	do
-	{
-		indice = LR_rechercher( t[i] , cle);
-	} while (i==MAX || indice != NULL );
-	LR_inserer(indice, cle);
-	// int i = 0;
-	// int j;
-	// do
-	// {
-	// 	j = hachage(cle);
-	// 	if(x[j] != NULL)
-	// 	{
-	// 		Element2p* pelem;
-	// 		pelem=(Element2p*)malloc(sizeof(Element2p));
-	// 		*x[j] = pelem->prec;
-	// 		pelem->cle=cle;
-	// 		pelem->succ = NULL;
-			
-	// 	}
-	// 	else 
-	// 	{
-	// 		if(x[j] == NULL)
-	// 		{
-	// 			Element2p* pelem;
-	// 			pelem=(Element2p*)malloc(sizeof(Element2p));
-	// 			pelem->prec=NULL;
-	// 			pelem->cle=cle;
-	// 			pelem->succ = NULL;
-	// 		}
-	// 		else
-	// 		{
-	// 			i++;
-	// 		}
-	// 	}
-	// } while (i == MAX);
+	int indice = hachage(k);
+	LR_inserer( &((*t)[indice]) , k);
 }
 
 void TH_supprimer(TH *t,Element2p* p)
 {
-	int cle;
-	if(p->cle == NULL)
+
+	if(p == NULL)
 	{
 		return;
 	}
 	else
 	{
-		cle = p->cle;
+		int indice = hachage(p->cle);
+		LR_supprimer(&((*t)[indice]),p);
 	}
-	LR_supprimer(*t,cle);
+	
 
 }
