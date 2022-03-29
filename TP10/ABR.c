@@ -10,20 +10,22 @@
 
 void ABR_creer(ABR* px) 
 {	// objectif NULL ;-)
-	...
+	*px = NULL;
 }
 
 int  ABR_vide(ABR x)
-{	...
+{	
+	return (x == NULL);
 }
 
 Noeud* ABR_rechercher(ABR x, int k)
-{	...
+{	
+
 }
 
 Noeud* ABR_minimum(ABR x)
 {	if( x == NULL )
-		...
+		return;
 	else
 		...
 	return ...
