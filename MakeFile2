@@ -1,0 +1,35 @@
+##################
+# Ch Jallet
+# projet : Mandelbrot
+# fichier : makefile
+# date : 2021/12/14
+##################
+
+### regle principale (la 1ere)
+all : mandelbrot	#nom du programme
+					# pas de commande
+			
+##############################
+### generation des modules objet
+complexe.o : complexe.c complexe.h
+	gcc complexe.c -c
+	
+image.o : image.c image.h
+	gcc image.c -c
+	
+principal.o : principal.c complexe.h image.h
+	gcc principal.c -c
+	
+##############################
+### generation des modules objet
+### regle principale : edition de lien
+mandelbrot : complexe.o image.o principal.o
+	gcc *.o -o mandelbrot -lm
+	
+##############################
+### regles complementaires usuelles
+clean : 
+	rm -f *.o
+
+mrproper : clean
+	rm -rf *~ a.out mandelbrot
