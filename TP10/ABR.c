@@ -4,7 +4,7 @@
  * date : 2022/03/18
  *******************
  */
- 
+
 #include "ABR.h"
 #include <stdlib.h>
 
@@ -18,33 +18,72 @@ int  ABR_vide(ABR x)
 	return (x == NULL);
 }
 
-Noeud* ABR_rechercher(ABR x, int k)
+Noeud* ABR_rechercher(ABR T, int k)
 {	
+	
+	if(T == NULL) // Verficiation que l'arbre est non vide
+		return NULL;
 
+	Noeud* ab = T->pere; //Positionne à la racine
+	if(k == ab->cle ) // Verifique que ce n'est pas la valeur qu'on recherche
+		return ab;
+	
+	if (k < ab->cle) //Regarde si la valeur recherche est plus petite que la valeur clé
+	{
+		ABR_rechercher(ab->gauche,k); // Recurcive
+	}
+	else
+	{
+		ABR_rechercher(ab->droite,k); // Recurcive
+	}
 }
 
 Noeud* ABR_minimum(ABR x)
-{	if( x == NULL )
+{	
+	if( x == NULL )
 		return;
-	else
-		...
-	return ...
+	
+	while (x->gauche != NULL)
+	{
+		x = x->gauche;
+	}
+	
+	return x;
 }
 
 Noeud* ABR_maximum(ABR x)
-{	...
+{	
+
+	if( x == NULL )
+		return;
+	
+	while (x->droite != NULL)
+	{
+		x = x->droite;
+	}
+
+	return x;
 }
 
 Noeud* ABR_successeur( Noeud* x)	// il est enracine
-{	if( x == NULL )
-		return x;
-	// else
-	...
-	return ...
+{	
+	Noeud* y ;
+	if( x->droite == NULL )
+		return ABR_maximum(x);
+	else
+		y = x->pere;
+		while (y != NULL && x = y->droite)
+		{
+			x = y;
+			y = x->pere;
+		}
+		return y;
 }
 
 Noeud* ABR_predecesseur( Noeud* x)
-{	...
+{	
+	
+
 }
 
 // routine (interne)
@@ -52,55 +91,98 @@ Noeud* nouveau_noeud(int k)
 {	Noeud* p = (Noeud*) malloc( sizeof(Noeud) );
 	p->cle = k;
 	// noeud isole : tous pointeurs a NULL
-	...
+	p->droite=NULL;
+	p->gauche=NULL;
+	p->pere=NULL;
 	return p;
 }
 
-void ABR_inserer(ABR* px, int k)
-{	if ( *px == NULL )
-		...
-	else if ( ... )	// a gauche toute !
-		if ( ... )  // il n'y a rien a gauche
-			...
-		else 	// descendre et relancer
-			...
-/*	else if( k == xxx.cle ) // ca ne devrait pas arriver
+void ABR_inserer(ABR* a, int k)
+{	
+	if ( *a == NULL )
 		return;
- */
-	else // meme chose a droite
-		...
+	
+	Noeud* x = a;
+	Noeud* pereX = NULL;
+
+	while (x != NULL)
+	{
+		pereX = x;
+		if (k < x->cle)
+		{
+			x = x->gauche;
+		}else
+		{
+			x =x->droite;
+		}
+	}
+	Noeud* z;
+	z->pere = pereX;
+	if (pereX = NULL)
+	{
+		a = z;
+	}else if (z->cle < x->cle)
+	{
+		pereX->gauche = z;
+	}else{
+		pereX->droite = z;
+	}
 }
 
-void ABR_supprimer(ABR* px, Noeud* p)
-{	if( p == NULL )
+void ABR_supprimer(ABR* T, Noeud* x)
+{	
+	Noeud* filsX;
+	if( x == NULL )
 		return;
-	// else
-	// 1er cas : feuille : pas de fils
-	if ( ... )
-	{	...
-		free(p);
+
+	if (x->gauche == NULL && x->droite == NULL)
+	{
+		if (x->pere == NULL)
+		{
+			T = NULL;
+		}
+		else
+		{
+			if (x == x->pere->gauche)
+			{
+				x->pere->gauche = NULL;
+			}
+			else
+			{
+				x->pere->droite = NULL;
+			}
+		}
+	}else if (x->gauche == NULL || x->droite == NULL)
+	{
+		if(x->gauche != NULL)
+		{
+			filsX = x->gauche;
+		}
+		else
+		{
+			filsX = x->droite;
+		}
+		filsX->pere = x->pere;
+		if(x->pere == NULL)
+		{
+			T = filsX;
+		}
+		else
+		{
+			if (x->pere->gauche == x)
+			{
+				x->pere->gauche = filsX;
+			}
+			else
+			{
+				x->pere->droite = filsX;
+			}
+		}
 	}
-	// 2eme cas : j'ai un fils
-	// => raccorder mon père et mon fils
-	else if ( ... ) // j'ai un fils
-	{	... 	// => la, je tiens mon fils (peu importe le cote)
-		// mon pere sera le sien
-		...
-		// mais si je n'en ai pas [de pere] (je suis a la racine), 
-		//		c'est lui qui s'y colle (a la racine)
-		...
-		// par contre si j'ai un pere il faut que f soit son fils
-		//		(il faut savoir de quel cote)
-		...
-		
-		// et la yapuka liberer la memoire
-		free(p);
-	}
-	// 3eme et dernier cas 
-	else 	// j'ai 2 fils
-	{	// ramener mon successeur (copier la clé) et supprimer le successeur
-		... = ABR_successeur(...);
-		...
-		ABR_supprimer(...);
+	else
+	{
+		Noeud* xmin;
+		xmin = ABR_minimum(x->droite);
+		ABR_supprimer(T,xmin->cle);
 	}
 }
