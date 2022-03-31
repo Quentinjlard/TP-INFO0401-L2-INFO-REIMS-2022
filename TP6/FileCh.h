@@ -10,7 +10,7 @@ typedef struct {
     
 } FileCh;
 
-void crerPile(FileCh *f);
+void creerFile(FileCh *f);
 int fileVide(FileCh f);
 Element tete(FileCh f);
 void enfier(FileCh *f, Element e);

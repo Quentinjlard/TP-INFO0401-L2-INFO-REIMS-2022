@@ -1,12 +1,12 @@
 #include "FileCh.h"
 
-void crerPile(FileCh *f)
+void creerFile(FileCh *f)
 {
-
+    f->cellule = NULL;
 }
 int fileVide(FileCh f)
 {
-
+    return (f.cellule == NULL);
 }
 Element tete(FileCh f)
 {

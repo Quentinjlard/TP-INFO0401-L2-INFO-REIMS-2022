@@ -3,21 +3,12 @@
 
 void crerPile(PileCh *pile)
 {
-    pile->cellule = 0;
+    pile->cellule=NULL;
 }
 
 int pileVider(PileCh pile)
 {
-    int estVide;
-    if(pile.cellule == NULL) {
-        estVide = 0;
-    }
-    else
-    {
-        estVide = 1;
-    }
-
-    return estVide;
+    return(pile.cellule == NULL);
 }
 
 void empiler(PileCh *pile, Element c)
@@ -33,11 +24,15 @@ void empiler(PileCh *pile, Element c)
 
 void depiler(PileCh *pile)
 {
-    
+    if(! pileVider(*pile))
+    {
+        Cellule *c = pile->cellule;
+        pile->cellule = pile->cellule->ptr;
+        free(c);
+    }
 }
 
 Element sommet(PileCh pile)
 {
-    int som = 0;
-    return som;
+    return pile.cellule->val;
 }
