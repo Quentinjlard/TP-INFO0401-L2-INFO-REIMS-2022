@@ -1,7 +1,7 @@
 #ifndef __CELLULE_H__
 #define __CELLULE_H__
 
-#include "element.h"
+#include "Element.h"
 
 typedef struct Cellule{
     Element val;

@@ -1,6 +1,6 @@
-#include "element.h"
-#include "cellule.h"
-#include "listeCh.h"
+#include "Element.h"
+#include "Cellule.h"
+#include "ListeCh.h"
 
 void creerListe(listeCh l)
 {

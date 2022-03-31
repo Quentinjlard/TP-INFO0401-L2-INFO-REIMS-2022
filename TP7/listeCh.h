@@ -1,8 +1,8 @@
 #ifndef __LISTECH_H__
 #define __LISTECH_H__
 
-#include "cellule.h"
-#include "element.h"
+#include "Cellule.h"
+#include "Element.h"
 
 typedef struct {
     Cellule *deb;

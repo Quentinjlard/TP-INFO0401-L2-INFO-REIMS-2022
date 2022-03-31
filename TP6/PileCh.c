@@ -1,13 +1,12 @@
-#include "pile.h"
+#include "PileCh.h"
 #include "cellule.h"
 
-void crerPile(Pile *pile)
+void crerPile(PileCh *pile)
 {
     pile->cellule = 0;
-    //pile->cellule->element = 0;
 }
 
-int pileVider(Pile pile)
+int pileVider(PileCh pile)
 {
     int estVide;
     if(pile.cellule == NULL) {
@@ -21,7 +20,7 @@ int pileVider(Pile pile)
     return estVide;
 }
 
-void empiler(Pile *pile, Element c)
+void empiler(PileCh *pile, Element c)
 {
     Cellule *cellule = (Cellule *) malloc(sizeof(Cellule));
     if(cellule != NULL)
@@ -32,12 +31,12 @@ void empiler(Pile *pile, Element c)
     }
 }
 
-void depiler(Pile *pile)
+void depiler(PileCh *pile)
 {
     
 }
 
-Element sommet(Pile pile)
+Element sommet(PileCh pile)
 {
     int som = 0;
     return som;

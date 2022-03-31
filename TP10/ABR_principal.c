@@ -26,17 +26,24 @@ void debug(char* msg)
 
 // celle-la n'est utile que pour la suivante
 void aff_infixe(ABR x) // infixe = croissant
-{	...
+{	
+
 }
 
 void afficher(ABR x)
-{	printf("contenu : ");
+{	
+	printf("contenu : ");
 	aff_infixe(x);
 	printf("\n");
 }
 
 void vider(ABR* px)
-{	...
+{	
+	while( ! ABR_vide(*px) )
+	{
+		afficher(*px);
+		ABR_supprimer(px, *px);
+	}
 }
 
 //////////////////////

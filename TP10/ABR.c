@@ -72,7 +72,7 @@ Noeud* ABR_successeur( Noeud* x)	// il est enracine
 		return ABR_maximum(x);
 	else
 		y = x->pere;
-		while (y != NULL && x = y->droite)
+		while (y != NULL && x == y->droite)
 		{
 			x = y;
 			y = x->pere;
@@ -82,8 +82,17 @@ Noeud* ABR_successeur( Noeud* x)	// il est enracine
 
 Noeud* ABR_predecesseur( Noeud* x)
 {	
-	
-
+	Noeud* y ;
+	if( x->droite == NULL )
+		return ABR_minimum(x);
+	else
+		y = x->pere;
+		while (y != NULL && x == y->droite)
+		{
+			x = y;
+			y = x->pere;
+		}
+		return y;
 }
 
 // routine (interne)
