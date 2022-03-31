@@ -8,6 +8,7 @@ int fileVide(FileCh f)
 {
     return (f.cellule == NULL);
 }
+
 Element tete(FileCh f)
 {
 

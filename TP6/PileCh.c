@@ -6,7 +6,7 @@ void crerPile(PileCh *pile)
     pile->cellule=NULL;
 }
 
-int pileVider(PileCh pile)
+int pileVide(PileCh pile)
 {
     return(pile.cellule == NULL);
 }
@@ -24,11 +24,11 @@ void empiler(PileCh *pile, Element c)
 
 void depiler(PileCh *pile)
 {
-    if(! pileVider(*pile))
+    if(! pileVide(*pile))
     {
         Cellule *c = pile->cellule;
-        pile->cellule = pile->cellule->ptr;
-        free(c);
+        pile->cellule = c->ptr;
+        free(pile);
     }
 }
 
