@@ -9,7 +9,6 @@ typedef struct {
     Cellule *cellule;
 } PileCh;
 
-
 void crerPile(PileCh *pile);
 void empiler(PileCh *pile, Element c);
 void depiler(PileCh *pile);

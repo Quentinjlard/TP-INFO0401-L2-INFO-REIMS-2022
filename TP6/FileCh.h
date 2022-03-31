@@ -6,14 +6,14 @@
 #include <stdlib.h>
 
 typedef struct {
-    Cellule *cellule;
-    
+    Cellule *tete;
+    Cellule *queue;
 } FileCh;
 
 void creerFile(FileCh *f);
 int fileVide(FileCh f);
 Element tete(FileCh f);
-void enfier(FileCh *f, Element e);
+void enfiler(FileCh *f, Element e);
 void defiler(FileCh *f);
 
 

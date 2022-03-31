@@ -28,7 +28,7 @@
  *		0 pour implem TabC
  *		1 pour implem Ch
  */
-#define VERSIONF 0
+#define VERSIONF 1
 
 #if VERSIONF == 0
 	#include "FileTabC.h"

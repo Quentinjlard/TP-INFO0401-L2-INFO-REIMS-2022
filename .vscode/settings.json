@@ -2,6 +2,7 @@
     "files.associations": {
         "*.rmd": "markdown",
         "element.h": "c",
-        "cellule.h": "c"
+        "cellule.h": "c",
+        "filech.h": "c"
     }
 }
