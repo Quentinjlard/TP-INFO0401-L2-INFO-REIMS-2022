@@ -11,7 +11,7 @@ typedef struct {
 } ListeCh;
 
 void creerListe();
-int listeVide(ListeCh *l);
+int listeVide(ListeCh l);
 void inserer(ListeCh *l, Element e);
 void supprimer(ListeCh *l);
 Element valeurCourante(ListeCh l);

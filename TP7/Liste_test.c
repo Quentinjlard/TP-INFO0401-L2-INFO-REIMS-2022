@@ -93,9 +93,9 @@ int main(void)
 
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
-	while( !listeVide(pl))
+	while( !listeVide(*pl))
 	{
-		printf("%d \t",!listeVide(pl));
+		printf("%d \t",!listeVide(*pl));
 		afficherL(pl);
 		supprimer(pl);
 	}
