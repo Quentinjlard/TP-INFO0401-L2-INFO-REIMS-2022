@@ -1,4 +1,6 @@
 #include "Element.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 Element SaisirElement(Element element)
 {
