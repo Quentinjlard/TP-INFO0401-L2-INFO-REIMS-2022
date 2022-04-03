@@ -1,11 +1,13 @@
 #include "Element.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-Element SaisirElement(Element element)
+Element saisie(Element* element)
 {
-    printf("Saisir un element");
-    scanf("%d", &element);
+    printf("Saisir un element : ");
+    scanf("%d", element);
 
-    return element;
+    return *element;
 }
 
 void Affichage(Element element)

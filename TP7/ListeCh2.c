@@ -1,17 +1,19 @@
 #include "Element.h"
 #include "Cellule2.h"
 #include "ListeCh2.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 void creerListe(ListeCh l)
 {
-    l.courant == NULL;
-    l.debut == NULL;
-    l.fin==NULL;
+    l.courant = NULL;
+    l.debut = NULL;
+    l.fin=NULL;
 }
 
 int listeVide(ListeCh *l)
 {
-    return (l->courant == NULL && l->debut == NULL && l->fin==NULL);
+    return (l==NULL);
 }
 
 void inserer(ListeCh *l, Element e)
@@ -33,7 +35,9 @@ void supprimer(ListeCh *l)
     else
     {
         Cellule *aSupprimer = l->debut;
+
         l->debut = l->debut->ptr;
+        
         free(aSupprimer);
     }
 }

@@ -3,9 +3,10 @@
 
 #include <stdlib.h>
 
+
 typedef int Element;
 
-Element SaisirElement(Element element);
+Element saisie(Element* element);
 
 void Affichage(Element element);
 

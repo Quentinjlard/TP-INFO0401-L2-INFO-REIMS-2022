@@ -1,18 +1,18 @@
 ##################
 # Ch Jallet
-# projet : file
+# projet : Mandelbrot
 # fichier : makefile, v2
 # date : 2021/12/14
 ##################
 
 CC = gcc
-CFLAGS = -Wall -ansi
-LDFLAGS = -lm
+CFLAGS = -Wall -Werror
+LDFLAGS = 
 EXE = Liste_test
 
 DEP=$(wildcard *.h)
 SRC=$(wildcard *.c)
-OBJ =$(SCR .C=.O)
+OBJ =$(SRC:.c=.o)
 
 ##############################
 ### regle principale (la 1ere)

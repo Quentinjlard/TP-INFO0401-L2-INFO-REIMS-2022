@@ -34,6 +34,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
@@ -92,8 +93,9 @@ int main(void)
 
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
-	while( ! listeVide(pl) )
+	while( !listeVide(pl))
 	{
+		printf("%d \t",!listeVide(pl));
 		afficherL(pl);
 		supprimer(pl);
 	}
@@ -103,9 +105,10 @@ int  longueurL(Liste *pl)
 	// apres il faut pour se remettre au bon endroit 
 	// 	=> il faut d'abord avoir compte la fin
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
-	int nbFin = 0, nbTotal = 0;
+	//int nbFin = 0;
+	int nbTotal = 0;
 	// 1. ? nbFin
-	nbFin = pl->fin;
+	//nbFin = pl->fin;
 	// 2. ? nbotal
 	Cellule* celCourant = pl->debut->ptr;
 	while ( celCourant != NULL )
@@ -127,7 +130,7 @@ void afficherL(Liste *pl)
     while (actuCell != NULL)
     {
         printf("%d -> ", actuCell->val);
-        actuCell = actuCell->ptr;
+		actuCell = actuCell->ptr;
     }
     printf("NULL\n");
 }
