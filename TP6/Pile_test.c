@@ -74,10 +74,11 @@ void viderP(Pile* p)
 // routine : transfert d'une pile dans une autre
 void transfererPP(Pile* p, Pile* pp)
 {	
-	Pile* temp;
-	temp = p;
-	p = pp;
-	pp = temp;
+	while( ! pileVide(*p) )
+	{
+		enfiler(pp,sommet(*p));
+		defiler(p);
+	}
 }
 
 int longueurP(Pile* p)
@@ -91,12 +92,17 @@ int longueurP(Pile* p)
 
 {	
 	int nb = 0;
-	Cellule* celCourant = p->sommet->ptr;
-	while ( celCourant != NULL )
+	Pile tmp;
+	creerPile(&tmp);
+
+	while( ! pileVide(*p) )
 	{
-		nb++;
-		celCourant = celCourant->ptr;
+		empiler(&tmp,sommet(*p));
+		depiler(p);
+		++nb;
 	}
+
+	transfererPP(&tmp,p);
 	return nb;
 }
 

@@ -84,21 +84,27 @@ void viderF(FileX* f)
 
 void transfererFF(FileX* f, FileX* ff)
 {	
-	FileX* temp;
-	temp = f;
-	f = ff;
-	ff = temp;
+	while( ! fileVide(*f) )
+	{
+		enfiler(ff,tete(*f));
+		defiler(f);
+	}
 }
 
 int longueurF(FileX* f)
 {	
 	int nb = 0;
-	Cellule* celCourant = f->tete->ptr;
-	while (celCourant != NULL)
+	FileX tmp;
+	creerFile(&tmp);
+
+	while( ! fileVide(*f) )
 	{
-		nb ++;
-		celCourant = f->tete->ptr;
+		enfiler(&tmp,tete(*f));
+		defiler(f);
+		++nb;
 	}
+
+	transfererFF(&tmp,f);
 	return nb;
 }
 

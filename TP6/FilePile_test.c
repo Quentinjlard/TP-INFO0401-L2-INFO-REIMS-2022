@@ -40,6 +40,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 
 //////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
@@ -111,21 +112,27 @@ void viderF(FileX* f)
 
 void transfererFF(FileX* f, FileX* ff)
 {	
-	FileX* temp;
-	temp = f;
-	f = ff;
-	ff = temp;
+	while( ! fileVide(*f) )
+	{
+		enfiler(ff,tete(*f));
+		defiler(f);
+	}
 }
 
 int longueurF(FileX* f)
 {	
 	int nb = 0;
-	Cellule* celCourant = f->tete->ptr;
-	while (celCourant != NULL)
+	FileX tmp;
+	creerFile(&tmp);
+
+	while( ! fileVide(*f) )
 	{
-		nb ++;
-		celCourant = f->tete->ptr;
+		enfiler(&tmp,tete(*f));
+		defiler(f);
+		++nb;
 	}
+
+	transfererFF(&tmp,f);
 	return nb;
 }
 
@@ -154,24 +161,29 @@ void viderP(Pile* p)
 		depiler(p);
 }
 
-// routine : transfert d'une pile dans une autre
 void transfererPP(Pile* p, Pile* pp)
 {	
-	Pile* temp;
-	temp = p;
-	p = pp;
-	pp = temp;
+	while( ! pileVide(*p) )
+	{
+		enfiler(pp,sommet(*p));
+		defiler(p);
+	}
 }
 
 int longueurP(Pile* p)
 {	
 	int nb = 0;
-	Cellule* celCourant = p->sommet->ptr;
-	while ( celCourant != NULL )
+	Pile tmp;
+	creerPile(&tmp);
+
+	while( ! pileVide(*p) )
 	{
-		nb++;
-		celCourant = celCourant->ptr;
+		empiler(&tmp,sommet(*p));
+		depiler(p);
+		++nb;
 	}
+
+	transfererPP(&tmp,p);
 	return nb;
 }
 
