@@ -116,7 +116,7 @@ int  longueurL(Liste *pl)
 void afficherL(Liste *pl)
 {	// la aussi il faudra se remettre au bon endroit
 	// 	=> nbFin et nbTotal necessaires aussi ici
-	Cellule *actuCell = pl->deb;
+	Cellule *actuCell = pl->debut;
 
     while (actuCell != NULL)
     {

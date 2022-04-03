@@ -89,15 +89,17 @@ int longueurP(Pile* p)
 	// 2. reconstituer
 	// NB : mon choix : compter a l'aller
 
-{	int nb = 0;
-	
-	while ( p->sommet->ptr != NULL )
+{	
+	int nb = 0;
+	Cellule* celCourant = p->sommet->ptr;
+	while ( celCourant != NULL )
 	{
 		nb++;
+		celCourant = celCourant->ptr;
 	}
-
 	return nb;
 }
+
 
 void afficherP(Pile* p)
 // idem mais en affichant au lieu de compter

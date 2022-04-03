@@ -120,9 +120,11 @@ void transfererFF(FileX* f, FileX* ff)
 int longueurF(FileX* f)
 {	
 	int nb = 0;
-	while (! fileVide(*f))
+	Cellule* celCourant = f->tete->ptr;
+	while (celCourant != NULL)
 	{
 		nb ++;
+		celCourant = f->tete->ptr;
 	}
 	return nb;
 }
@@ -147,3 +149,48 @@ void inverserF(FileX* f)
 	}
 }
 
+void viderP(Pile* p)
+{	while ( ! pileVide(*p) )
+		depiler(p);
+}
+
+// routine : transfert d'une pile dans une autre
+void transfererPP(Pile* p, Pile* pp)
+{	
+	Pile* temp;
+	temp = p;
+	p = pp;
+	pp = temp;
+}
+
+int longueurP(Pile* p)
+{	
+	int nb = 0;
+	Cellule* celCourant = p->sommet->ptr;
+	while ( celCourant != NULL )
+	{
+		nb++;
+		celCourant = celCourant->ptr;
+	}
+	return nb;
+}
+
+void afficherP(Pile* p)
+{	
+	printf("contenu : ");
+	printf("%d",p->sommet->val);
+	printf("\n");
+}
+
+void inverserP(Pile* p)
+{	
+	if(p==NULL) 
+		return;
+	else
+	{
+		Pile p2;	
+		creerFile(&p2);
+		transfererFF(p, &p2);
+		transfererFF(&p2, p);
+	}
+}

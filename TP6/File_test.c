@@ -93,9 +93,11 @@ void transfererFF(FileX* f, FileX* ff)
 int longueurF(FileX* f)
 {	
 	int nb = 0;
-	while (! fileVide(*f))
+	Cellule* celCourant = f->tete->ptr;
+	while (celCourant != NULL)
 	{
 		nb ++;
+		celCourant = f->tete->ptr;
 	}
 	return nb;
 }

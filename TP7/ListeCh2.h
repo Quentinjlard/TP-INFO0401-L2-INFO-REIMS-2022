@@ -5,8 +5,8 @@
 #include "Element.h"
 
 typedef struct {
-    Cellule *deb;
-    Cellule *crt;
+    Cellule *debut;
+    Cellule *courant;
     Cellule *fin;
 } ListeCh;
 

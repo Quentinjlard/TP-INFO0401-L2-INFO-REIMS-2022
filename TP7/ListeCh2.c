@@ -4,14 +4,14 @@
 
 void creerListe(ListeCh l)
 {
-    l.crt == NULL;
-    l.deb == NULL;
+    l.courant == NULL;
+    l.debut == NULL;
     l.fin==NULL;
 }
 
 int listeVide(ListeCh *l)
 {
-    return (l->crt == NULL && l->deb == NULL && l->fin==NULL);
+    return (l->courant == NULL && l->debut == NULL && l->fin==NULL);
 }
 
 void inserer(ListeCh *l, Element e)
@@ -19,8 +19,8 @@ void inserer(ListeCh *l, Element e)
     Cellule* newCl = (Cellule*)malloc(sizeof(Cellule));
 
     newCl->val = e;
-    newCl->ptr = l->deb;
-    l->deb = newCl;
+    newCl->ptr = l->debut;
+    l->debut = newCl;
 }
 
 void supprimer(ListeCh *l)
@@ -32,40 +32,40 @@ void supprimer(ListeCh *l)
     }
     else
     {
-        Cellule *aSupprimer = l->deb;
-        l->deb = l->deb->ptr;
+        Cellule *aSupprimer = l->debut;
+        l->debut = l->debut->ptr;
         free(aSupprimer);
     }
 }
 
 Element valeurCourante(ListeCh l)
 {
-    return (l.crt->val);
+    return (l.courant->val);
 }
 
 void allerDebut(ListeCh *l)
 {
     if(estDebut(*l) == 0){
-        l->crt = l->deb;
+        l->courant = l->debut;
     }
 }
 
 void allerFin(ListeCh *l)
 {
     if(estFin(*l) == 0){
-        l->crt = l->fin;
+        l->courant = l->fin;
     }
 }
 void avancer(ListeCh *l)
 {
-    l->crt = l->crt->ptr;
+    l->courant = l->courant->ptr;
 }
 
 int estDebut(ListeCh l)
 {
-    return (l.deb == l.crt);
+    return (l.debut == l.courant);
 }
 int estFin(ListeCh l)
 {
-    return (l.fin == l.crt);
+    return (l.fin == l.courant);
 }
