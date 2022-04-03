@@ -105,11 +105,17 @@ int  longueurL(Liste *pl)
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
 	int nbFin = 0, nbTotal = 0;
 	// 1. ? nbFin
-	
+	nbFin = pl->fin;
 	// 2. ? nbotal
-	
+	Cellule* celCourant = pl->debut->ptr;
+	while ( celCourant != NULL )
+	{
+		nbTotal++;
+		celCourant = celCourant->ptr;
+	}
 	// 3. se remettre au bon endroit
-	
+	allerDebut(pl);
+
 	return nbTotal;
 }
 
