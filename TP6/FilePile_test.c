@@ -146,3 +146,4 @@ void inverserF(FileX* f)
 		transfererFF(&f2, f);
 	}
 }
+

@@ -17,7 +17,7 @@
 // choisissez : 0 pour implem par tableau
 //	sinon chainage 
 //			 => 1 pour "remede 1" ; 2 pour "remede 2"	
-#define VERSION 0
+#define VERSION 2
 
 #include "Element.h"
 #if VERSION == 1
@@ -92,6 +92,11 @@ int main(void)
 
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
+	while( ! listeVide(pl) )
+	{
+		afficherL(pl);
+		supprimer(pl);
+	}
 }
 int  longueurL(Liste *pl)
 {	// aller au debut et parcourir l'ensemble
@@ -100,9 +105,9 @@ int  longueurL(Liste *pl)
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
 	int nbFin = 0, nbTotal = 0;
 	// 1. ? nbFin
-	...
+	
 	// 2. ? nbotal
-	...
+	
 	// 3. se remettre au bon endroit
 	
 	return nbTotal;
@@ -111,5 +116,12 @@ int  longueurL(Liste *pl)
 void afficherL(Liste *pl)
 {	// la aussi il faudra se remettre au bon endroit
 	// 	=> nbFin et nbTotal necessaires aussi ici
-	...
+	Cellule *actuCell = pl->deb;
+
+    while (actuCell != NULL)
+    {
+        printf("%d -> ", actuCell->val);
+        actuCell = actuCell->ptr;
+    }
+    printf("NULL\n");
 }

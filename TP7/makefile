@@ -8,7 +8,7 @@
 CC = gcc
 CFLAGS = -Wall -ansi
 LDFLAGS = -lm
-EXE = file
+EXE = Liste_test
 
 DEP=$(wildcard *.h)
 SRC=$(wildcard *.c)
