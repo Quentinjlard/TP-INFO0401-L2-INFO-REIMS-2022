@@ -2,41 +2,53 @@
 
 void creerFile(FileCh *f)
 {
-    f = NULL;
+    f->queue = NULL;
+    f->tete = NULL;
 }
 int fileVide(FileCh f)
 {
-    return (f.tete == f.queue);
+    return (f.queue == NULL);
 }
 
 Element tete(FileCh f)
 {
-    return f.tete;
+    return f.tete->val;
 }
 
 void enfiler(FileCh *f, Element e)
 {
-    if(f->tete == f->queue+1%e)
-    {
-        return;
-    }
-    else
-    {
-        f->tete->val = e;
-        f->tete = f->tete + 1;
-    }
+    Cellule* cl = (Cellule*)malloc(sizeof(Cellule));
+    cl->val = e;    
+    cl->ptr = NULL;    
+    if (fileVide(*f))    
+    {        
+        f->tete = cl;    
+    }    
+    else    
+    {        
+        f->queue->ptr = cl;    
+    }    
+    f->queue = cl;
 }
 
 void defiler(FileCh *f)
 {
     if(!fileVide(*f)){
+        printf("Impossible de defiler");
         return;
     }
     else
     {
-        Element x;
-        x = f->tete;
-        f->tete = x + 1;
+        Cellule* cl = &(f->tete);
+        Element el = f->tete->val;
+        f->tete = f->tete->ptr;
+
+        if (f->tete == NULL)
+        {
+            f->queue=NULL;
+        }
+
+        free(cl);
     }
     
 }

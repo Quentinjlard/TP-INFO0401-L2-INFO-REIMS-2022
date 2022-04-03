@@ -73,27 +73,49 @@ void viderP(Pile* p)
 
 // routine : transfert d'une pile dans une autre
 void transfererPP(Pile* p, Pile* pp)
-{	...
+{	
+	Pile* temp;
+	temp = p;
+	p = pp;
+	pp = temp;
 }
 
 int longueurP(Pile* p)
 // on enleve les elements puis on les remet : si l'implem est chainee
 // 		on a peu de chances que le ptr vers la 1ere cellule ait la meme valeur
 //		=> modifie le contenu de la structure => on passe l'adresse de la pile
-{	int nb = 0;
-	...
+
 	// 1. sortir et stocker
 	// 2. reconstituer
 	// NB : mon choix : compter a l'aller
-	...
+
+{	int nb = 0;
+	
+	while ( p->sommet->ptr != NULL )
+	{
+		nb++;
+	}
+
 	return nb;
 }
 
 void afficherP(Pile* p)
 // idem mais en affichant au lieu de compter
-{	...
+{	
+	printf("contenu : ");
+	printf("%d",p->sommet->val);
+	printf("\n");
 }
 
 void inverserP(Pile* p)
-{	...
+{	
+	if(p==NULL) 
+		return;
+	else
+	{
+		Pile p2;	
+		creerFile(&p2);
+		transfererFF(p, &p2);
+		transfererFF(&p2, p);
+	}
 }

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 typedef struct {
-    Cellule *cellule;
+    Cellule *sommet;
 } PileCh;
 
 void crerPile(PileCh *pile);

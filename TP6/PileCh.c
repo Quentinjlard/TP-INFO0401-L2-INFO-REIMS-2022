@@ -1,38 +1,42 @@
 #include "PileCh.h"
 #include "cellule.h"
 
-void crerPile(PileCh *pile)
+void crerPile(PileCh *p)
 {
-    pile->cellule=NULL;
+    p->sommet=NULL;
 }
 
-int pileVide(PileCh pile)
+int pileVide(PileCh p)
 {
-    return(pile.cellule == NULL);
+    return(p.sommet == NULL);
 }
 
-void empiler(PileCh *pile, Element c)
+void empiler(PileCh *p, Element c)
 {
-    Cellule *cellule = (Cellule *) malloc(sizeof(Cellule));
-    if(cellule != NULL)
+    Cellule *cl = (Cellule *) malloc(sizeof(Cellule));
+    cl->val = c;
+    cl->ptr = p->sommet;
+    p->sommet=cl;
+}
+
+void depiler(PileCh *p)
+{
+    if(pileVide(*p))
     {
-        cellule->val = c;
-        cellule->ptr = pile->cellule;
-        pile->cellule = cellule;
+        printf("Impossible la pile est vide");
     }
-}
-
-void depiler(PileCh *pile)
-{
-    if(! pileVide(*pile))
+    else
     {
-        Cellule *c = pile->cellule;
-        pile->cellule = c->ptr;
-        free(pile);
+        Cellule *cl = (Cellule *)malloc(sizeof(Cellule));
+        cl = p->sommet;
+        Element X = p->sommet->val;
+        p->sommet = p->sommet->ptr;
+
+        free(cl);
     }
 }
 
 Element sommet(PileCh pile)
 {
-    return pile.cellule->val;
+    return pile.sommet->val;
 }

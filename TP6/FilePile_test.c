@@ -100,4 +100,49 @@ int main(void)
 // fonctions calculables
 // C. leurs definitions (declarations a la fin)
 
-...
+void viderF(FileX* f)
+{	
+	while( ! fileVide(*f) )
+	{
+		afficher(*f);
+		defiler(f);
+	}
+}
+
+void transfererFF(FileX* f, FileX* ff)
+{	
+	FileX* temp;
+	temp = f;
+	f = ff;
+	ff = temp;
+}
+
+int longueurF(FileX* f)
+{	
+	int nb = 0;
+	while (! fileVide(*f))
+	{
+		nb ++;
+	}
+	return nb;
+}
+
+void afficherF(FileX* f)
+{	
+	printf("contenu : ");
+	printf("%d",f->tete);
+	printf("\n");
+}
+
+void inverserF(FileX* f)
+{	
+	if(f==NULL) 
+		return;
+	else
+	{
+		FileX f2;	
+		creerFile(&f2);
+		transfererFF(f, &f2);
+		transfererFF(&f2, f);
+	}
+}
