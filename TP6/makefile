@@ -1,27 +1,29 @@
 ##################
 # Ch Jallet
-# projet : file
+# projet : Mandelbrot
 # fichier : makefile, v2
 # date : 2021/12/14
 ##################
 
 CC = gcc
-CFLAGS = -Wall -ansi
-LDFLAGS = -lm
-EXE = File_test
+CFLAGS = -Wall -Werror
+LDFLAGS = 
+EXE1 = File_test
+EXE2 = Pile_test
+EXE3 = FilePile_test
 
 DEP=$(wildcard *.h)
 SRC=$(wildcard *.c)
-OBJ =$(SCR .C=.O)
+OBJ =$(SRC:.c=.o)
 
 ##############################
 ### regle principale (la 1ere)
-all : $(EXE)
+all : $(EXE1) $(EXE2) $(EXE3)
 			
 ##############################
 ### generation des modules objet
 
-File_test.o : File_test.c $(DEP)
+principal.o : principal.c $(DEP)
 	$(CC) $(CFLAGS) $< -c
 %.o : %.c %.h
 	$(CC) $(CFLAGS) $< -c
