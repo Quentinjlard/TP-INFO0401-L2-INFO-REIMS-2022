@@ -11,9 +11,9 @@ void creerListe(ListeCh l)
     l.fin=NULL;
 }
 
-int listeVide(ListeCh l)
+int listeVide(ListeCh *l)
 {
-    return (l==NULL);
+    return (l->debut==l->fin);
 }
 
 void inserer(ListeCh *l, Element e)

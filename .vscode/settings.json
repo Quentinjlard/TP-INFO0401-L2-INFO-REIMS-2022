@@ -3,6 +3,7 @@
         "*.rmd": "markdown",
         "element.h": "c",
         "cellule.h": "c",
-        "filech.h": "c"
+        "filech.h": "c",
+        "listech2.h": "c"
     }
 }
