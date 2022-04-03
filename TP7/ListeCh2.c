@@ -11,10 +11,10 @@ void creerListe(ListeCh l)
     l.fin=NULL;
 }
 
-int listeVide(ListeCh *l)
-{
-    return (l->debut==l->fin);
-}
+    int listeVide(ListeCh *l)
+    {
+        return (l->debut==NULL);
+    }
 
 void inserer(ListeCh *l, Element e)
 {

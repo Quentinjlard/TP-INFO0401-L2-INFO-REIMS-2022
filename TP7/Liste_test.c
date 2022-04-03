@@ -93,9 +93,9 @@ int main(void)
 
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
-	while( !listeVide(pl))
+	allerDebut(pl);
+	while( !listeVide(pl) )
 	{
-		printf("%d \t",!listeVide(pl));
 		afficherL(pl);
 		supprimer(pl);
 	}
@@ -105,21 +105,27 @@ int  longueurL(Liste *pl)
 	// apres il faut pour se remettre au bon endroit 
 	// 	=> il faut d'abord avoir compte la fin
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
-	//int nbFin = 0;
+	int nbFin = 0;
 	int nbTotal = 0;
 	// 1. ? nbFin
-	//nbFin = pl->fin;
+	allerFin(pl);
+	nbFin = pl->fin->val	;
 	// 2. ? nbotal
-	Cellule* celCourant = pl->debut->ptr;
-	while ( celCourant != NULL )
-	{
-		nbTotal++;
-		celCourant = celCourant->ptr;
-	}
+	allerDebut(pl);
+	Cellule *actuCell = pl->debut;
+	while (actuCell != NULL)
+    {
+        nbTotal++;
+		actuCell = actuCell->ptr;
+    }
 	// 3. se remettre au bon endroit
 	allerDebut(pl);
 
-	return nbTotal;
+	if(nbFin == nbTotal){
+		return nbFin;
+	}else{
+		return nbTotal;
+	}
 }
 
 void afficherL(Liste *pl)
