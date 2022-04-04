@@ -136,11 +136,12 @@ void afficherL(Liste *pl)
 	{
 		allerDebut(pl);
 	}
-
+	Cellule *pos;
     while (estFin(*pl))
     {
 		affichage(pl->courant->val);
-		pl = pl->courant->suivant;
+		pos = pl->courant->suivant;
+		pl->courant = pos->suivant;
     }
 	printf("NULL\n");
 	allerDebut(pl);
