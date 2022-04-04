@@ -8,9 +8,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror
 LDFLAGS = 
-EXE1 = File_test
-EXE2 = Pile_test
-EXE3 = FilePile_test
+EXE = FilePile_test
 
 DEP=$(wildcard *.h)
 SRC=$(wildcard *.c)
@@ -18,7 +16,7 @@ OBJ =$(SRC:.c=.o)
 
 ##############################
 ### regle principale (la 1ere)
-all : $(EXE1) $(EXE2) $(EXE3)
+all : $(EXE)
 			
 ##############################
 ### generation des modules objet
