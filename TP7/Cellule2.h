@@ -4,8 +4,9 @@
 #include "Element.h"
 
 typedef struct Cellule{
+    struct Cellule *precedant;
     Element val;
-    struct Cellule *ptr;
+    struct Cellule *suivant;
 } Cellule;
 
 #endif

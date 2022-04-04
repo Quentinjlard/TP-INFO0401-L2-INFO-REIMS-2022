@@ -77,7 +77,7 @@ void viderF(FileX* f)
 {	
 	while( ! fileVide(*f) )
 	{
-		afficherF(f);
+		//afficherF(f);
 		defiler(f);
 	}
 }
@@ -110,9 +110,18 @@ int longueurF(FileX* f)
 
 void afficherF(FileX* f)
 {	
-	printf("contenu : ");
-	printf("%d -> ",f->tete->val);
-	printf("\n");
+	FileX tmp;
+	creerFile(&tmp);
+
+	while( ! fileVide(*f) )
+	{
+		enfiler(&tmp,tete(*f));
+		afficher(tete(*f));
+		printf(" ");
+		defiler(f);
+	}
+
+	transfererFF(&tmp,f);
 }
 
 void inverserF(FileX* f)

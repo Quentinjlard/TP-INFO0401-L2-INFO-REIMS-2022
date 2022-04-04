@@ -3,8 +3,8 @@
 
 typedef int Element;
 
-Element SaisirElement(Element element);
+Element saisie(Element *element);
 
-void Affichage(Element element);
+void afficher(Element element);
 
 #endif // __ELEMENT_H__

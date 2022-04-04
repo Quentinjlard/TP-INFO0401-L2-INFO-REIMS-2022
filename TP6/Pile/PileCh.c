@@ -1,7 +1,11 @@
 #include "PileCh.h"
-#include "cellule.h"
+#include "Cellule.h"
+#include "Element.h"
 
-void crerPile(PileCh *p)
+#include <stdio.h>
+#include <stdlib.h>
+
+void creerPile(PileCh *p)
 {
     p->sommet=NULL;
 }
@@ -11,10 +15,10 @@ int pileVide(PileCh p)
     return(p.sommet == NULL);
 }
 
-void empiler(PileCh *p, Element c)
+void empiler(PileCh *p, Element e)
 {
     Cellule *cl = (Cellule *) malloc(sizeof(Cellule));
-    cl->val = c;
+    cl->val = e;
     cl->ptr = p->sommet;
     p->sommet=cl;
 }
@@ -27,9 +31,10 @@ void depiler(PileCh *p)
     }
     else
     {
-        Cellule *cl;
+        Cellule* cl;
         cl = p->sommet;
         p->sommet = p->sommet->ptr;
+        free(cl);
     }
 }
 

@@ -2,8 +2,7 @@
 #define __FILECH_H__
 
 #include "Cellule.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "Element.h"
 
 typedef struct {
     Cellule *tete;

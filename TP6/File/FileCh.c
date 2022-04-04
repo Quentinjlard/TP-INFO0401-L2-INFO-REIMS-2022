@@ -1,4 +1,9 @@
 #include "FileCh.h"
+#include "Element.h"
+#include "Cellule.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 void creerFile(FileCh *f)
 {

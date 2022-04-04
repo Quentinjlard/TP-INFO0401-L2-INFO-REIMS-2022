@@ -11,17 +11,17 @@ void creerListe(ListeCh l)
     l.fin=NULL;
 }
 
-    int listeVide(ListeCh *l)
-    {
-        return (l->debut==NULL);
-    }
+int listeVide(ListeCh *l)
+{
+    return (l->debut==NULL);
+}
 
 void inserer(ListeCh *l, Element e)
 {
     Cellule* newCl = (Cellule*)malloc(sizeof(Cellule));
 
     newCl->val = e;
-    newCl->ptr = l->debut;
+    newCl->ptr = l->courant;
     l->debut = newCl;
 }
 

@@ -3,7 +3,7 @@
 
 typedef int Element;
 
-Element saisie(Element* element);
+void saisie(Element* element);
 
 void afficher(Element element);
 

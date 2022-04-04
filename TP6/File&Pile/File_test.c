@@ -5,32 +5,14 @@
  *******************
  */
 
-#include "Element.h"
-
-/* choisissez l'implementation des piles : 
- *		0 pour implem Tab
- *		1 pour implem Ch
- */
-#define VERSIONP 1
-
-#if VERSIONP == 0
-	#include "PileTab.h"
-	typedef PileTab Pile;
-#else
-	#include "Cellule.h"
-	#include "PileCh.h"
-	typedef PileCh Pile;	
-#endif
-
-///////////////////////////////////////////////////////
-
-/* choisissez l'implementation des files : 
+/* choisissez l'implem des files : 
  *		0 pour implem TabC
  *		1 pour implem Ch
  */
-#define VERSIONF 1
+#define VERSION 1
 
-#if VERSIONF == 0
+#include "Element.h"
+#if VERSION == 0
 	#include "FileTabC.h"
 	typedef FileTabC FileX;
 #else
@@ -40,7 +22,6 @@
 #endif
 
 #include <stdio.h>
-#include <stdlib.h>
 
 //////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
@@ -48,23 +29,14 @@
 // fonctions calculables
 // A. leurs declarations (definitions a la fin)
 void viderF(FileX *);
-void viderP(Pile *);
-
 void transfererFF(FileX *, FileX *);
-void transfererFP(FileX *, Pile *);
-void transfererPF(Pile *, FileX *);
-void transfererPP(Pile *, Pile *);
 
 // on ne modifie pas officiellement mais on bouge les Element 
 //	=> les pointeurs on change de valeur => FileX * en parametre
-int  longueurF(FileX *);
-int  hauteurP(Pile *);
-
+int  longueurF(FileX *);	
 void afficherF(FileX *);
-void afficherP(Pile *);
 
 void inverserF(FileX *);
-void inverserP(Pile *);
 
 //////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
@@ -80,14 +52,14 @@ int main(void)
 	{	saisie(&e);
 		enfiler(&f, e);
 	}
-
-	printf("contenu apres remplissage : "); 	afficherF(&f);
+	printf("contenu apres remplissage : ");
+		afficherF(&f);	// le contenu de la structure change : on passe le ptr 
 
 	printf("longueur : %d\n", longueurF(&f));
 	printf("contenu avant inversion : "); 	afficherF(&f);
 	inverserF(&f);
 	printf("contenu apres inversion : "); 	afficherF(&f);
-	printf("\t => cette fois ca marche (?)\n");
+	printf("\t => pas sur que ca marche...\n");
 	
 	viderF(&f);
 	printf("contenu apres vidage : "); 		afficherF(&f);
@@ -105,7 +77,7 @@ void viderF(FileX* f)
 {	
 	while( ! fileVide(*f) )
 	{
-		afficher(*f);
+		//afficherF(f);
 		defiler(f);
 	}
 }
@@ -138,9 +110,18 @@ int longueurF(FileX* f)
 
 void afficherF(FileX* f)
 {	
-	printf("contenu : ");
-	printf("%d",f->tete);
-	printf("\n");
+	FileX tmp;
+	creerFile(&tmp);
+
+	while( ! fileVide(*f) )
+	{
+		enfiler(&tmp,tete(*f));
+		afficher(tete(*f));
+		printf(" ");
+		defiler(f);
+	}
+
+	transfererFF(&tmp,f);
 }
 
 void inverserF(FileX* f)
@@ -153,56 +134,5 @@ void inverserF(FileX* f)
 		creerFile(&f2);
 		transfererFF(f, &f2);
 		transfererFF(&f2, f);
-	}
-}
-
-void viderP(Pile* p)
-{	while ( ! pileVide(*p) )
-		depiler(p);
-}
-
-void transfererPP(Pile* p, Pile* pp)
-{	
-	while( ! pileVide(*p) )
-	{
-		enfiler(pp,sommet(*p));
-		defiler(p);
-	}
-}
-
-int longueurP(Pile* p)
-{	
-	int nb = 0;
-	Pile tmp;
-	creerPile(&tmp);
-
-	while( ! pileVide(*p) )
-	{
-		empiler(&tmp,sommet(*p));
-		depiler(p);
-		++nb;
-	}
-
-	transfererPP(&tmp,p);
-	return nb;
-}
-
-void afficherP(Pile* p)
-{	
-	printf("contenu : ");
-	printf("%d",p->sommet->val);
-	printf("\n");
-}
-
-void inverserP(Pile* p)
-{	
-	if(p==NULL) 
-		return;
-	else
-	{
-		Pile p2;	
-		creerFile(&p2);
-		transfererFF(p, &p2);
-		transfererFF(&p2, p);
 	}
 }
