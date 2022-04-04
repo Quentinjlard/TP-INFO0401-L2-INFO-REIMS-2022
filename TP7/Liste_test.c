@@ -137,7 +137,7 @@ void afficherL(Liste *pl)
 		allerDebut(pl);
 	}
 	Cellule *pos;
-    while (estFin(*pl))
+    while (!estFin(*pl))
     {
 		affichage(pl->courant->val);
 		pos = pl->courant->suivant;
