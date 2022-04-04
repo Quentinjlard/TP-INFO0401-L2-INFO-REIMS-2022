@@ -27,12 +27,9 @@ void depiler(PileCh *p)
     }
     else
     {
-        Cellule *cl = (Cellule *)malloc(sizeof(Cellule));
+        Cellule *cl;
         cl = p->sommet;
-        Element X = p->sommet->val;
         p->sommet = p->sommet->ptr;
-
-        free(cl);
     }
 }
 

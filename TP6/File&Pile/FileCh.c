@@ -33,14 +33,13 @@ void enfiler(FileCh *f, Element e)
 
 void defiler(FileCh *f)
 {
-    if(!fileVide(*f)){
+    if(fileVide(*f)){
         printf("Impossible de defiler");
         return;
     }
     else
     {
-        Cellule* cl = &(f->tete);
-        Element el = f->tete->val;
+        Cellule* cl = f->tete;
         f->tete = f->tete->ptr;
 
         if (f->tete == NULL)
