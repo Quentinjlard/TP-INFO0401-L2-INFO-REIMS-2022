@@ -4,7 +4,7 @@
 
 void saisie(Element* element)
 {
-    printf("Saisir un element");
+    printf("Saisir un element : ");
     scanf("%d", element);
 }
 

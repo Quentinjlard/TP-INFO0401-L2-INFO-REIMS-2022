@@ -52,17 +52,17 @@ int main(void)
 	{	saisie(&e);
 		enfiler(&f, e);
 	}
-	printf("contenu apres remplissage : ");
+	printf("Contenu apres remplissage : \n");
 		afficherF(&f);	// le contenu de la structure change : on passe le ptr 
 
-	printf("longueur : %d\n", longueurF(&f));
-	printf("contenu avant inversion : "); 	afficherF(&f);
+	printf("\n \t Longueur : %d\n", longueurF(&f));
+	printf("Contenu avant inversion : \n"); 	afficherF(&f);
 	inverserF(&f);
-	printf("contenu apres inversion : "); 	afficherF(&f);
+	printf("\nContenu apres inversion : \n"); 	afficherF(&f);
 	printf("\t => pas sur que ca marche...\n");
 	
 	viderF(&f);
-	printf("contenu apres vidage : "); 		afficherF(&f);
+	printf("Contenu apres vidage : \n"); 		afficherF(&f);
 
 	return 0;
 }

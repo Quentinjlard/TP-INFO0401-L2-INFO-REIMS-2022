@@ -48,15 +48,15 @@ int main(void)
 	{	saisie(&e);
 		empiler(&p, e);
 	}
-	printf("contenu apres remplissage : \n"); 	
+	printf("Contenu apres remplissage : \n"); 	
 		afficherP(&p);	// le contenu de la structure change : on passe le ptr 
 
-	printf("longueur : %d\n", longueurP(&p));
-	printf("contenu avant inversion : "); 	afficherP(&p);
+	printf("\t longueur : %d\n", longueurP(&p));
+	printf("Contenu avant inversion : \n"); 	afficherP(&p);
 	inverserP(&p);
-	printf("contenu apres inversion : "); 	afficherP(&p);
+	printf("Contenu apres inversion : \n"); 	afficherP(&p);
 	viderP(&p);
-	printf("contenu apres vidage : "); 		afficherP(&p);
+	printf("Contenu apres vidage : \n"); 		afficherP(&p);
 	return 0;
 }
 
