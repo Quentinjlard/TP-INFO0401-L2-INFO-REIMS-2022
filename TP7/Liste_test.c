@@ -136,20 +136,12 @@ void afficherL(Liste *pl)
 	{
 		allerDebut(pl);
 	}
-	Cellule *actuCell = pl->debut;
 
-    while (actuCell != NULL)
+    while (estFin(*pl))
     {
-        printf("%d -> ", actuCell->val);
-		if (actuCell->suivant != NULL)
-		{
-			actuCell = actuCell->suivant;
-		}
-		else
-		{
-			printf("NULL\n");
-			allerDebut(pl);
-		}
+		affichage(pl->courant->val);
+		pl = pl->courant->suivant;
     }
+	printf("NULL\n");
 	allerDebut(pl);
 }
