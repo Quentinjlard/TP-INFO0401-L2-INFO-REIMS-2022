@@ -7,4 +7,5 @@ Element saisie(Element *element);
 
 void afficher(Element element);
 
-#endif // __ELEMENT_H__
+#endif 
+// __ELEMENT_H__
