@@ -10,15 +10,15 @@ typedef struct {
     Cellule *fin;
 } ListeCh;
 
-void creerListe();
-int listeVide(ListeCh *l);
-void inserer(ListeCh *l, Element e);
-void supprimer(ListeCh *l);
-Element valeurCourante(ListeCh l);
+void creerListe(ListeCh*);
+int listeVide(ListeCh);
+void inserer(ListeCh*, Element);
+void supprimer(ListeCh*);
+Element valeurCourante(ListeCh );
 
-void allerDebut(ListeCh *l);
-void allerFin(ListeCh *l);
-void avancer(ListeCh *l);
-int estDebut(ListeCh l);
-int estFin(ListeCh l);
+void allerDebut(ListeCh*);
+void allerFin(ListeCh*);
+void avancer(ListeCh*);
+int estDebut(ListeCh);
+int estFin(ListeCh);
 #endif

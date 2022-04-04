@@ -4,41 +4,53 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void creerListe(ListeCh l)
+void creerListe(ListeCh* pl)
 {
-    l.courant = NULL;
-    l.debut = NULL;
-    l.fin=NULL;
+    pl->courant = NULL;
+    pl->debut = NULL;
+    pl->fin=NULL;
 }
 
-int listeVide(ListeCh *l)
+int listeVide(ListeCh pl)
 {
-    return (l->debut==NULL);
+    return (pl.debut==NULL);
 }
 
-void inserer(ListeCh *l, Element e)
+void inserer(ListeCh *pl, Element e)
 {
     
     Cellule* newCl = (Cellule*)malloc(sizeof(Cellule));
 
     newCl->val = e;
-    newCl->suivant = l->courant;
-    newCl->precedant = l->courant->precedant;
-    l->debut = newCl;
-}
+    newCl->suivant = pl->courant;
 
-void supprimer(ListeCh *l)
-{
-    if(l==NULL)
+    if(pl->courant->suivant==NULL)
     {
-        printf("Liste vide");
-        return;
+        newCl->suivant = NULL;
     }
     else
     {
-        Cellule *aSupprimer = l->debut;
+        newCl->suivant = pl->courant;
+    }
+    if(pl->courant->precedant==NULL)
+    {
+        newCl->precedant = NULL;
+    }
+    else
+    {
+        newCl->precedant = pl->courant->precedant;
+    }
+}
 
-        l->debut = l->debut->suivant;
+void supprimer(ListeCh *pl)
+{
+    if(pl!=NULL)
+    {
+        Cellule *aSupprimer;
+        aSupprimer = pl->courant;
+
+        pl->courant->suivant = aSupprimer->suivant;
+        pl->courant->precedant = aSupprimer->precedant;
         
         free(aSupprimer);
     }
@@ -51,20 +63,18 @@ Element valeurCourante(ListeCh l)
 
 void allerDebut(ListeCh *l)
 {
-    if(estDebut(*l) == 0){
-        l->courant = l->debut;
-    }
+    l->courant = l->debut;
 }
 
 void allerFin(ListeCh *l)
 {
-    if(estFin(*l) == 0){
-        l->courant = l->fin;
-    }
+    l->courant = l->fin;
 }
+
 void avancer(ListeCh *l)
 {
-    l->courant = l->courant->suivant;
+    if(l->courant->suivant != NULL)
+        l->courant = l->courant->suivant;
 }
 
 int estDebut(ListeCh l)

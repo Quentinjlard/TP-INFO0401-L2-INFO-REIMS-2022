@@ -94,12 +94,14 @@ int main(void)
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
 	allerDebut(pl);
-	while( !listeVide(pl) )
+	while( !listeVide(*pl) )
 	{
 		afficherL(pl);
 		supprimer(pl);
 	}
 }
+
+
 int  longueurL(Liste *pl)
 {	// aller au debut et parcourir l'ensemble
 	// apres il faut pour se remettre au bon endroit 
@@ -107,9 +109,12 @@ int  longueurL(Liste *pl)
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
 	int nbFin = 0;
 	int nbTotal = 0;
+
+	Cellule* positionArriver = pl->courant; // Enregistre ma position
+	
 	// 1. ? nbFin
 	allerFin(pl);
-	nbFin = pl->fin->val	;
+	nbFin = pl->fin->val;
 	// 2. ? nbotal
 	allerDebut(pl);
 	Cellule *actuCell = pl->debut;
@@ -119,7 +124,7 @@ int  longueurL(Liste *pl)
 		actuCell = actuCell->suivant;
     }
 	// 3. se remettre au bon endroit
-	allerDebut(pl);
+	pl->courant = positionArriver;
 
 	if(nbFin == nbTotal){
 		return nbFin;
@@ -139,7 +144,7 @@ void afficherL(Liste *pl)
 	Cellule *pos;
     while (pl->courant != pl->fin )
     {
-		affichage(pl->courant->val);
+		affichage(valeurCourante(*pl));
 		pos = pl->courant->suivant;
 		pl->courant = pos->suivant;
     }
