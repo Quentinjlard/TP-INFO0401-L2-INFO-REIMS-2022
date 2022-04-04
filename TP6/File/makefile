@@ -8,7 +8,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror
 LDFLAGS = 
-EXE = FilePile_test
+EXE = File_test
 
 DEP=$(wildcard *.h)
 SRC=$(wildcard *.c)
