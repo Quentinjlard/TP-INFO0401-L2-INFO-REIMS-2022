@@ -62,7 +62,7 @@ int main(void)
 	{	saisie(&e);
 		inserer(&l, e);
 	}
-	printf("contenu apres remplissage : "); 	
+	printf("contenu apres remplissage : \n"); 	
 		afficherL(&l);	// cette fois le contenu de la struct. ne change pas
 		// mais on passe quand meme l'adresse
 		// 		pour respecter la notation imposee pour les piles /files
@@ -116,7 +116,7 @@ int  longueurL(Liste *pl)
 	while (actuCell != NULL)
     {
         nbTotal++;
-		actuCell = actuCell->ptr;
+		actuCell = actuCell->suivant;
     }
 	// 3. se remettre au bon endroit
 	allerDebut(pl);
@@ -131,12 +131,25 @@ int  longueurL(Liste *pl)
 void afficherL(Liste *pl)
 {	// la aussi il faudra se remettre au bon endroit
 	// 	=> nbFin et nbTotal necessaires aussi ici
+
+	if(!estDebut(*pl))
+	{
+		allerDebut(pl);
+	}
 	Cellule *actuCell = pl->debut;
 
     while (actuCell != NULL)
     {
         printf("%d -> ", actuCell->val);
-		actuCell = actuCell->ptr;
+		if (actuCell->suivant != NULL)
+		{
+			actuCell = actuCell->suivant;
+		}
+		else
+		{
+			printf("NULL\n");
+			allerDebut(pl);
+		}
     }
-    printf("NULL\n");
+	allerDebut(pl);
 }

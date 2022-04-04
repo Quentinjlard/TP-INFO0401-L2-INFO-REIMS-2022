@@ -6,8 +6,8 @@
 
 typedef int Element;
 
-Element saisie(Element* element);
+void saisie(Element* element);
 
-void Affichage(Element element);
+void affichage(Element element);
 
 #endif

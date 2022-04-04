@@ -18,10 +18,12 @@ int listeVide(ListeCh *l)
 
 void inserer(ListeCh *l, Element e)
 {
+    
     Cellule* newCl = (Cellule*)malloc(sizeof(Cellule));
 
     newCl->val = e;
-    newCl->ptr = l->courant;
+    newCl->suivant = l->courant;
+    newCl->precedant = l->courant->precedant;
     l->debut = newCl;
 }
 
@@ -36,7 +38,7 @@ void supprimer(ListeCh *l)
     {
         Cellule *aSupprimer = l->debut;
 
-        l->debut = l->debut->ptr;
+        l->debut = l->debut->suivant;
         
         free(aSupprimer);
     }
@@ -62,7 +64,7 @@ void allerFin(ListeCh *l)
 }
 void avancer(ListeCh *l)
 {
-    l->courant = l->courant->ptr;
+    l->courant = l->courant->suivant;
 }
 
 int estDebut(ListeCh l)
