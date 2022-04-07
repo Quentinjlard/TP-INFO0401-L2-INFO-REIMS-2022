@@ -1,0 +1,19 @@
+#ifndef __FILETABC_H__
+#define __FILETABC_H__
+
+#include "Cellule.h"
+#define MAX 100
+
+typedef struct {
+    Element t[MAX];
+    int tete, queue;
+} FileTabC;
+
+void creerFile(FileTabC *f);
+int fileVide(FileTabC f);
+Element tete(FileTabC f);
+void enfiler(FileTabC *f, Element e);
+void defiler(FileTabC *f);
+
+
+#endif /* __PILE_H__ */
