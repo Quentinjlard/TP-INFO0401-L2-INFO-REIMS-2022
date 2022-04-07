@@ -1,7 +1,6 @@
 #include "Element.h"
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void saisie(Element* element)
 {
@@ -9,7 +8,7 @@ void saisie(Element* element)
     scanf("%d", element);
 }
 
-void affichage(Element element)
+void afficher(Element element)
 {
-    printf("%d ",element);
+    printf("%d",element);
 }

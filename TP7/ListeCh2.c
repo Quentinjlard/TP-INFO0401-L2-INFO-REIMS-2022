@@ -76,29 +76,34 @@ void inserer(ListeCh *pl, Element e)
 
 void supprimer(ListeCh *pl)
 {
-    if (pl->courant == NULL)
+    Cellule *aSupprimer = pl->courant;
+
+    if (aSupprimer == NULL)
 		return;
         
     if(pl->debut == pl->fin)
     {
         pl->debut = NULL;
+        pl->courant = NULL; // ++++
         pl->fin = NULL;
-    }else if (pl->courant->precedant == NULL) { // 1er
-		pl->debut = pl->courant->suivant;
-    }else if(pl->courant == pl->fin)
+    }else if (aSupprimer == pl->debut) { // 1er
+        aSupprimer->suivant->precedant = NULL;
+        pl->courant = aSupprimer->suivant; //++++
+		pl->debut = aSupprimer->suivant;
+    }else if(aSupprimer == pl->fin)
     {
-        pl->fin = pl->courant->precedant;
+        pl->courant = aSupprimer->suivant;
+        pl->fin = aSupprimer->precedant;
         pl->fin->suivant = NULL;
     }
-	else{ 
-		pl->courant->precedant->suivant = pl->courant->suivant;
-        pl->courant->suivant->precedant = pl->courant->precedant;
+	else
+    { 
+		aSupprimer->precedant->suivant = aSupprimer->suivant;
+        aSupprimer->suivant->precedant = aSupprimer->precedant;
+        pl->courant = aSupprimer->suivant;
 	}  
 
-    Cellule* c = pl->courant;
-    pl->courant = c->suivant;
-	free(c);
-    
+	free(aSupprimer);
 }
 
 Element valeurCourante(ListeCh l)

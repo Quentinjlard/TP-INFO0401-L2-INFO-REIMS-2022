@@ -62,22 +62,22 @@ int main(void)
 	{	saisie(&e);
 		inserer(&l, e);
 	}
-	printf("contenu apres remplissage : \n"); 	
+	printf("\ncontenu apres remplissage : \n"); 	
 		afficherL(&l);	// cette fois le contenu de la struct. ne change pas
 		// mais on passe quand meme l'adresse
 		// 		pour respecter la notation imposee pour les piles /files
 	printf("\t => longueur : %d\n", longueurL(&l));
-	printf("contenu apres longueur : \n"); 	afficherL(&l);
+	printf("\ncontenu apres longueur : \n"); 	afficherL(&l);
 
 	allerDebut(&l); avancer(&l); avancer(&l);
-	printf("on va au debut et on avance 2 fois : \n"); afficherL(&l);
+	printf("\non va au debut et on avance 2 fois : \n"); afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 	
 	supprimer(&l);	supprimer(&l);	
-	printf("on en supprime 2  : \n"); afficherL(&l);
+	printf("\non en supprime 2  : \n"); afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 	saisie(&e); inserer(&l,e);
-	printf("on en ajoute 1 : \n"); afficherL(&l);
+	printf("\non en ajoute 1 : \n"); afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 
 	viderL(&l);
@@ -97,7 +97,7 @@ void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
 	allerDebut(pl);
 	while( !videListe(*pl) )
-	{
+	{	
 		afficherL(pl);
 		supprimer(pl);
 	}
@@ -111,30 +111,48 @@ int  longueurL(Liste *pl)
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
 	int longueur = 0;
 
-	Cellule* positionArriver = pl->courant; // Enregistre ma position
-	
+	int nbFin = 0;
+	while ( !estFin(*pl) ) 
+	{	avancer(pl); 
+		++nbFin;
+	}
+
 	allerDebut(pl);
-	while (pl->courant != NULL )
+	while ( ! estFin(*pl) )
     {
-		pl->courant = pl->courant->suivant;
+		avancer(pl);
 		++longueur;
     }
 
-	pl->courant = positionArriver;
-
+	allerDebut(pl);
+	for(int i = 0 ; i<longueur-nbFin ; i++)
+		avancer(pl);
+	
 	return longueur;
 }
 
 void afficherL(Liste *pl)
 {	// la aussi il faudra se remettre au bon endroit
 	// 	=> nbFin et nbTotal necessaires aussi ici
-	Cellule *temp;
-	temp = pl->debut;
+	int longueur = 0;
 
-    while (temp != NULL )
+	int nbFin = 0;
+	while ( !estFin(*pl) ) 
+	{	avancer(pl); 
+		++nbFin;
+	}
+
+	allerDebut(pl);
+	while ( ! estFin(*pl) )
     {
-		affichage(temp->val);
-		temp = temp->suivant;
+		affichage( valeurCourante(*pl) );
+		avancer(pl);
+		++longueur;
     }
-	printf("NULL\n");
+
+	allerDebut(pl);
+	for(int i = 0 ; i<longueur-nbFin ; i++)
+		avancer(pl);	
+
+	printf("\n");
 }

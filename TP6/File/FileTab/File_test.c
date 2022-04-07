@@ -9,7 +9,7 @@
  *		0 pour implem TabC
  *		1 pour implem Ch
  */
-#define VERSION 1
+#define VERSION 0
 
 #include "Element.h"
 #if VERSION == 0
