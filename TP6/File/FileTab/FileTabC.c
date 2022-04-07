@@ -1,14 +1,3 @@
-/**
- * @file FileTabC.c
- * @author JUILLIARD Quentin (quentin.juilliard@etudiant.univ-reims.fr)
- * @brief 
- * @version1
- * @date 2022-04-07
- * 
- * @copyright Copyright (c) 2022
- * 
- */
-
 #include "FileTabC.h"
 #include "Element.h"
 
@@ -33,8 +22,16 @@ Element tete(FileTabC f)
 
 void enfiler(FileTabC *f, Element e)
 {
-    f->queue = ( (f->queue + 1) % (MAX));
-    f->t[f->queue] = e;
+    if(fileVide(*f))
+    {
+        f->t[f->tete] = e;
+    }
+    else
+    {
+        f->t[f->queue] = e;
+        
+    }
+    f->queue++;
 }
 
 void defiler(FileTabC *f)

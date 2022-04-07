@@ -77,7 +77,7 @@ void viderF(FileX* f)
 {	
 	while( ! fileVide(*f) )
 	{
-		//afficherF(f);
+		afficherF(f);
 		defiler(f);
 	}
 }
@@ -120,6 +120,7 @@ void afficherF(FileX* f)
 		printf(" ");
 		defiler(f);
 	}
+	printf("\n");
 
 	transfererFF(&tmp,f);
 }

@@ -27,7 +27,12 @@ void debug(char* msg)
 // celle-la n'est utile que pour la suivante
 void aff_infixe(ABR x) // infixe = croissant
 {	
-
+	if (!ABR_vide(x))
+    {
+        aff_infixe(x->gauche);
+        printf("%d\t", x->cle);
+        aff_infixe(x->droite);
+    }
 }
 
 void afficher(ABR x)

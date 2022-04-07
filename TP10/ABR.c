@@ -20,29 +20,20 @@ int  ABR_vide(ABR x)
 
 Noeud* ABR_rechercher(ABR T, int k)
 {	
-	
-	if(T == NULL) // Verficiation que l'arbre est non vide
-		return NULL;
-
-	Noeud* ab = T->pere; //Positionne à la racine
-	if(k == ab->cle ) // Verifique que ce n'est pas la valeur qu'on recherche
-		return ab;
-	
-	if (k < ab->cle) //Regarde si la valeur recherche est plus petite que la valeur clé
-	{
-		ABR_rechercher(ab->gauche,k); // Recurcive
-	}
-	else
-	{
-		ABR_rechercher(ab->droite,k); // Recurcive
-	}
+	if( !ABR_vide(T)){// Verficiation que l'arbre est non vide
+		Noeud* ab = T->pere; //Positionne à la racine
+		if(k == ab->cle ) // Verifique que ce n'est pas la valeur qu'on recherche
+			return ab;
+		
+		if (k < ab->cle) //Regarde si la valeur recherche est plus petite que la valeur clé
+			ABR_rechercher(ab->gauche,k); // Recurcive
+		else
+			ABR_rechercher(ab->droite,k); // Recurcive
+	} 
 }
 
 Noeud* ABR_minimum(ABR x)
 {	
-	if( x == NULL )
-		return;
-	
 	while (x->gauche != NULL)
 	{
 		x = x->gauche;
@@ -54,9 +45,6 @@ Noeud* ABR_minimum(ABR x)
 Noeud* ABR_maximum(ABR x)
 {	
 
-	if( x == NULL )
-		return;
-	
 	while (x->droite != NULL)
 	{
 		x = x->droite;
@@ -69,8 +57,11 @@ Noeud* ABR_successeur( Noeud* x)	// il est enracine
 {	
 	Noeud* y ;
 	if( x->droite == NULL )
+	{
 		return ABR_maximum(x);
+	}
 	else
+	{
 		y = x->pere;
 		while (y != NULL && x == y->droite)
 		{
@@ -78,14 +69,18 @@ Noeud* ABR_successeur( Noeud* x)	// il est enracine
 			y = x->pere;
 		}
 		return y;
+	}
 }
 
 Noeud* ABR_predecesseur( Noeud* x)
 {	
 	Noeud* y ;
 	if( x->droite == NULL )
+	{
 		return ABR_minimum(x);
+	}
 	else
+	{
 		y = x->pere;
 		while (y != NULL && x == y->droite)
 		{
@@ -93,6 +88,7 @@ Noeud* ABR_predecesseur( Noeud* x)
 			y = x->pere;
 		}
 		return y;
+	}
 }
 
 // routine (interne)
@@ -111,7 +107,7 @@ void ABR_inserer(ABR* a, int k)
 	if ( *a == NULL )
 		return;
 	
-	Noeud* x = a;
+	Noeud* x = *a;
 	Noeud* pereX = NULL;
 
 	while (x != NULL)
@@ -125,15 +121,20 @@ void ABR_inserer(ABR* a, int k)
 			x =x->droite;
 		}
 	}
-	Noeud* z;
+
+
+	Noeud* z =(Noeud*)malloc(sizeof(Noeud));
 	z->pere = pereX;
-	if (pereX = NULL)
+	if (pereX == NULL)
 	{
-		a = z;
-	}else if (z->cle < x->cle)
+		*a = z;
+	}
+	else if ( k < x->cle)
 	{
 		pereX->gauche = z;
-	}else{
+	}
+	else
+	{
 		pereX->droite = z;
 	}
 }
@@ -174,7 +175,7 @@ void ABR_supprimer(ABR* T, Noeud* x)
 		filsX->pere = x->pere;
 		if(x->pere == NULL)
 		{
-			T = filsX;
+			*T = filsX;
 		}
 		else
 		{
@@ -192,6 +193,7 @@ void ABR_supprimer(ABR* T, Noeud* x)
 	{
 		Noeud* xmin;
 		xmin = ABR_minimum(x->droite);
-		ABR_supprimer(T,xmin->cle);
+		ABR_supprimer(T,xmin);
 	}
 }
+

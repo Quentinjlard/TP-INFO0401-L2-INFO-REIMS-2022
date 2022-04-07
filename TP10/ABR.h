@@ -8,9 +8,8 @@
 #ifndef __ABR_H__
 #define __ABR_H__
 
-typedef struct noeud_ds
-{	
-    Noeud *pere, *droite, *gauche;
+typedef struct Noeud{	
+    struct Noeud *pere, *droite, *gauche;
     int cle;
 } Noeud;
 

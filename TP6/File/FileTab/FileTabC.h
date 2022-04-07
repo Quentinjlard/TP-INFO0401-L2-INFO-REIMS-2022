@@ -12,7 +12,7 @@
 #define __FILETABC_H__
 
 #include "Element.h"
-#define MAX 15
+#define MAX 100
 
 typedef struct {
     Element t[MAX];
