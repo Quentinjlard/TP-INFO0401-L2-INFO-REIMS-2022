@@ -1,8 +1,18 @@
+/**
+ * @file FileTabC.h
+ * @author JUILLIARD Quentin (quentin.juilliard@etudiant.univ-reims.fr)
+ * @brief 
+ * @version1
+ * @date 2022-04-07
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef __FILETABC_H__
 #define __FILETABC_H__
 
-#include "Cellule.h"
-#define MAX 100
+#include "Element.h"
+#define MAX 15
 
 typedef struct {
     Element t[MAX];

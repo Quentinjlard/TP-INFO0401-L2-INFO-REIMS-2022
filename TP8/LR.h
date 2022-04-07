@@ -1,7 +1,6 @@
 /**
  * @file LR.h
  * @author JUILLIARD Quentin
- * @author COGNE Romain
  * @brief 
  * @version 0.1
  * @date 2022-03-27
