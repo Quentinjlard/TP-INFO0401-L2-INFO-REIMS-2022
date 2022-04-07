@@ -10,85 +10,79 @@
 
 void ABR_creer(ABR* px) 
 {	// objectif NULL ;-)
-	*px = NULL;
+	px = NULL;
 }
 
 int  ABR_vide(ABR x)
 {	
-	return (x == NULL);
+	return (x==NULL);
 }
 
-Noeud* ABR_rechercher(ABR T, int k)
+Noeud* ABR_rechercher(ABR x, int k)
 {	
-	if( !ABR_vide(T)){// Verficiation que l'arbre est non vide
-		Noeud* ab = T->pere; //Positionne à la racine
-		if(k == ab->cle ) // Verifique que ce n'est pas la valeur qu'on recherche
-			return ab;
-		
-		if (k < ab->cle) //Regarde si la valeur recherche est plus petite que la valeur clé
-			ABR_rechercher(ab->gauche,k); // Recurcive
-		else
-			ABR_rechercher(ab->droite,k); // Recurcive
-	} 
+	if(x!=NULL || k == x->cle)
+		return x;
+
+	if( k < x->cle)
+		return ABR_rechercher(x->gauche,k);
+	else
+		return ABR_rechercher(x->droite,k);
 }
 
 Noeud* ABR_minimum(ABR x)
 {	
-	while (x->gauche != NULL)
-	{
+	if(x == NULL) return NULL;
+
+	while(x->gauche!=NULL)
 		x = x->gauche;
-	}
-	
+
 	return x;
 }
 
 Noeud* ABR_maximum(ABR x)
 {	
+	if(x == NULL) return NULL;
 
-	while (x->droite != NULL)
-	{
+	while(x->droite!=NULL)
 		x = x->droite;
-	}
 
 	return x;
 }
 
 Noeud* ABR_successeur( Noeud* x)	// il est enracine
-{	
-	Noeud* y ;
-	if( x->droite == NULL )
+{	if( x == NULL )
+		return x;
+	// else
+	
+	if(x->droite != NULL)
+		return ABR_minimum(x->droite);
+	
+	Noeud* y = x->pere;
+	while (y != NULL && x == y->droite)
 	{
-		return ABR_maximum(x);
-	}
-	else
-	{
+		x = y;
 		y = x->pere;
-		while (y != NULL && x == y->droite)
-		{
-			x = y;
-			y = x->pere;
-		}
-		return y;
 	}
+	return y;
+	
 }
 
 Noeud* ABR_predecesseur( Noeud* x)
 {	
-	Noeud* y ;
-	if( x->droite == NULL )
+	if( x == NULL )
+		return x;
+	// else
+	
+	if(x->gauche != NULL)
+		return ABR_maximum(x->gauche);
+	
+	Noeud* y = x->pere;
+	while (y != NULL && x == y->gauche)
 	{
-		return ABR_minimum(x);
-	}
-	else
-	{
+		x = y;
 		y = x->pere;
-		while (y != NULL && x == y->droite)
-		{
-			x = y;
-			y = x->pere;
-		}
-		return y;
 	}
+	return y;
 }
 
 // routine (interne)
@@ -96,104 +90,64 @@ Noeud* nouveau_noeud(int k)
 {	Noeud* p = (Noeud*) malloc( sizeof(Noeud) );
 	p->cle = k;
 	// noeud isole : tous pointeurs a NULL
-	p->droite=NULL;
-	p->gauche=NULL;
-	p->pere=NULL;
+	p->droite = NULL;
+	p->gauche = NULL;
+	p->pere = NULL;
 	return p;
 }
 
-void ABR_inserer(ABR* a, int k)
+void ABR_inserer(ABR* px, int k)
 {	
-	if ( *a == NULL )
-		return;
-	
-	Noeud* x = *a;
-	Noeud* pereX = NULL;
+	Noeud* y = (Noeud*) malloc( sizeof(Noeud) );
+	Noeud* x = (Noeud*) malloc( sizeof(Noeud) );
+	Noeud *z = (Noeud*) malloc( sizeof(Noeud) );
+	y = NULL;
+	x = *px;
+	z->cle = k;
 
-	while (x != NULL)
-	{
-		pereX = x;
-		if (k < x->cle)
-		{
+	while(x!=NULL)
+	{	
+		y = x;
+		if(k < x->cle)
 			x = x->gauche;
-		}else
-		{
-			x =x->droite;
-		}
+		else
+			x = x->droite;
 	}
 
-
-	Noeud* z =(Noeud*)malloc(sizeof(Noeud));
-	z->pere = pereX;
-	if (pereX == NULL)
-	{
-		*a = z;
-	}
-	else if ( k < x->cle)
-	{
-		pereX->gauche = z;
-	}
+	z->pere = y;
+	if(y == NULL)
+		*px = z;
+	else if( z->cle < y->cle )
+		y->gauche = z;
 	else
-	{
-		pereX->droite = z;
-	}
+		y->droite = z;
 }
 
-void ABR_supprimer(ABR* T, Noeud* x)
-{	
-	Noeud* filsX;
-	if( x == NULL )
+void ABR_supprimer(ABR* px, Noeud* p)
+{	if( p == NULL )
 		return;
-
-	if (x->gauche == NULL && x->droite == NULL)
-	{
-		if (x->pere == NULL)
-		{
-			T = NULL;
-		}
-		else
-		{
-			if (x == x->pere->gauche)
-			{
-				x->pere->gauche = NULL;
-			}
-			else
-			{
-				x->pere->droite = NULL;
-			}
-		}
-	}else if (x->gauche == NULL || x->droite == NULL)
-	{
-		if(x->gauche != NULL)
-		{
-			filsX = x->gauche;
-		}
-		else
-		{
-			filsX = x->droite;
-		}
-		filsX->pere = x->pere;
-		if(x->pere == NULL)
-		{
-			*T = filsX;
-		}
-		else
-		{
-			if (x->pere->gauche == x)
-			{
-				x->pere->gauche = filsX;
-			}
-			else
-			{
-				x->pere->droite = filsX;
-			}
-		}
-	}
+	Noeud* y = (Noeud*)malloc(sizeof(Noeud));
+	if(p->gauche == NULL || p->droite == NULL)
+		y = p;
 	else
-	{
-		Noeud* xmin;
-		xmin = ABR_minimum(x->droite);
-		ABR_supprimer(T,xmin);
-	}
-}
+		y = ABR_successeur(p);
 
+	Noeud* x = (Noeud*)malloc(sizeof(Noeud));
+	if(p->gauche != NULL)
+		x = y->gauche;
+	else
+		x = y->droite;
+
+	if(x!=NULL)
+		x->pere = y->pere;
+
+	if(y->pere == NULL)
+		*px = x;
+	else if(y == y->pere->gauche)
+		y->pere->gauche = x;
+		else
+			y->pere->droite = x;
+
+	if(y != p)
+		p->cle = y->cle;
+}
