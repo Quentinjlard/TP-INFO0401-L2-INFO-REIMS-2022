@@ -66,20 +66,22 @@ int main(void)
 		afficherL(&l);	// cette fois le contenu de la struct. ne change pas
 		// mais on passe quand meme l'adresse
 		// 		pour respecter la notation imposee pour les piles /files
-
 	printf("\t => longueur : %d\n", longueurL(&l));
-	printf("contenu apres longueur : "); 	afficherL(&l);
+	printf("contenu apres longueur : \n"); 	afficherL(&l);
 
 	allerDebut(&l); avancer(&l); avancer(&l);
-	printf("on va au debut et on avance 2 fois : "); afficherL(&l);
+	printf("on va au debut et on avance 2 fois : \n"); afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 	
-	supprimer(&l); supprimer(&l); 	saisie(&e); inserer(&l,e);
-	printf("on en supprime 2 et on en ajoute 1 : "); afficherL(&l);
+	supprimer(&l);	supprimer(&l);	
+	printf("on en supprime 2  : \n"); afficherL(&l);
+	printf("\t => longueur : %d\n", longueurL(&l));
+	saisie(&e); inserer(&l,e);
+	printf("on en ajoute 1 : \n"); afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 
 	viderL(&l);
-	printf("contenu apres vidage : "); 		afficherL(&l);
+	printf("contenu apres vidage : \n"); 		afficherL(&l);
 	printf("\t => longueur : %d\n", longueurL(&l));
 	
 	return 0;
@@ -94,7 +96,7 @@ int main(void)
 void viderL(Liste *pl)
 {	// aller au debut et tout supprimer (un par un)
 	allerDebut(pl);
-	while( !listeVide(*pl) )
+	while( !videListe(*pl) )
 	{
 		afficherL(pl);
 		supprimer(pl);
@@ -107,47 +109,32 @@ int  longueurL(Liste *pl)
 	// apres il faut pour se remettre au bon endroit 
 	// 	=> il faut d'abord avoir compte la fin
 	//	   pour ensuite repartir du debut et avancer du bon nb de cases
-	int nbFin = 0;
-	int nbTotal = 0;
+	int longueur = 0;
 
 	Cellule* positionArriver = pl->courant; // Enregistre ma position
 	
-	// 1. ? nbFin
-	allerFin(pl);
-	nbFin = pl->fin->val;
-	// 2. ? nbotal
 	allerDebut(pl);
-	Cellule *actuCell = pl->debut;
-	while (actuCell != NULL)
+	while (pl->courant != NULL )
     {
-        nbTotal++;
-		actuCell = actuCell->suivant;
+		pl->courant = pl->courant->suivant;
+		++longueur;
     }
-	// 3. se remettre au bon endroit
+
 	pl->courant = positionArriver;
 
-	if(nbFin == nbTotal){
-		return nbFin;
-	}else{
-		return nbTotal;
-	}
+	return longueur;
 }
 
 void afficherL(Liste *pl)
 {	// la aussi il faudra se remettre au bon endroit
 	// 	=> nbFin et nbTotal necessaires aussi ici
+	Cellule *temp;
+	temp = pl->debut;
 
-	if(!estDebut(*pl))
-	{
-		allerDebut(pl);
-	}
-	Cellule *pos;
-    while (pl->courant != pl->fin )
+    while (temp != NULL )
     {
-		affichage(valeurCourante(*pl));
-		pos = pl->courant->suivant;
-		pl->courant = pos->suivant;
+		affichage(temp->val);
+		temp = temp->suivant;
     }
 	printf("NULL\n");
-	allerDebut(pl);
 }

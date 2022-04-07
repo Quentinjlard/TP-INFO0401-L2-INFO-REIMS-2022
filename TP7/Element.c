@@ -11,5 +11,5 @@ void saisie(Element* element)
 
 void affichage(Element element)
 {
-    printf("%d",element);
+    printf("%d -> ",element);
 }

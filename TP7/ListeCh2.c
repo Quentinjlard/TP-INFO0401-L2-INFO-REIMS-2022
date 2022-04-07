@@ -11,49 +11,94 @@ void creerListe(ListeCh* pl)
     pl->fin=NULL;
 }
 
-int listeVide(ListeCh pl)
+int videListe(ListeCh pl)
 {
+    //printf(" -> Test Vide \n");
     return (pl.debut==NULL);
 }
 
 void inserer(ListeCh *pl, Element e)
 {
-    
-    Cellule* newCl = (Cellule*)malloc(sizeof(Cellule));
+    //printf("Vide : %d ----- Debut : %d ----- Fin : %d \n",videListe(*pl),estDebut(*pl),estFin(*pl));
+    Cellule *nc;
+    nc = (Cellule *) malloc(sizeof(Cellule));
+    nc->val = e;
 
-    newCl->val = e;
-    newCl->suivant = pl->courant;
+    Cellule *c = pl->courant;
 
-    if(pl->courant->suivant==NULL)
+    if(videListe(*pl))
     {
-        newCl->suivant = NULL;
+        //Pas de successeur + modif : debut, fin, couran
+        printf("1\n");
+        nc->suivant = NULL;
+        nc->precedant = NULL;
+
+        pl->debut = nc;
+        pl->fin = nc;
+        //printf("\tdebut : %d ----- courant : %d ----- fin : %d ----- courant : %d \n",pl->debut->val,pl->courant->val,pl->fin->val,c->val);
+    }
+    else if(estDebut(*pl))
+    {
+        //Successeur & précédant : l'ancien premier + modif premier
+        printf("2\n");
+        
+        nc->precedant = NULL;
+        nc->suivant = c;
+        c->precedant = nc;
+
+        pl->debut = nc;
+        //printf("\tdebut : %d ----- courant : %d ----- fin : %d ----- courant : %d \n",pl->debut->val,pl->courant->val,pl->fin->val,c->val);      
+    }
+    else if(estFin(*pl)){ //C == NULL
+        printf("3\n");
+        nc->suivant = NULL;
+        nc->precedant = pl->fin;
+        
+        pl->fin->suivant = nc;
+        pl->fin = nc;
     }
     else
     {
-        newCl->suivant = pl->courant;
+        //Relier les 2 autours
+        printf("4\n");
+        nc->suivant = c;
+        nc->precedant = c->precedant;
+
+        c->precedant->suivant = nc;
+        c->precedant = nc;
+
+        //printf("\tdebut : %d ----- courant : %d ----- fin : %d ----- courant : %d",pl->debut->val,pl->courant->val,pl->fin->val,c->val);      
+
     }
-    if(pl->courant->precedant==NULL)
-    {
-        newCl->precedant = NULL;
-    }
-    else
-    {
-        newCl->precedant = pl->courant->precedant;
-    }
+    //printf("4\n");
+    //printf("\n");
 }
 
 void supprimer(ListeCh *pl)
 {
-    if(pl!=NULL)
-    {
-        Cellule *aSupprimer;
-        aSupprimer = pl->courant;
-
-        pl->courant->suivant = aSupprimer->suivant;
-        pl->courant->precedant = aSupprimer->precedant;
+    if (pl->courant == NULL)
+		return;
         
-        free(aSupprimer);
+    if(pl->debut == pl->fin)
+    {
+        pl->debut = NULL;
+        pl->fin = NULL;
+    }else if (pl->courant->precedant == NULL) { // 1er
+		pl->debut = pl->courant->suivant;
+    }else if(pl->courant == pl->fin)
+    {
+        pl->fin = pl->courant->precedant;
+        pl->fin->suivant = NULL;
     }
+	else{ 
+		pl->courant->precedant->suivant = pl->courant->suivant;
+        pl->courant->suivant->precedant = pl->courant->precedant;
+	}  
+
+    Cellule* c = pl->courant;
+    pl->courant = c->suivant;
+	free(c);
+    
 }
 
 Element valeurCourante(ListeCh l)
@@ -66,22 +111,26 @@ void allerDebut(ListeCh *l)
     l->courant = l->debut;
 }
 
-void allerFin(ListeCh *l)
+void allerFin(ListeCh *pl)
 {
-    l->courant = l->fin;
+    pl->courant = NULL;
 }
 
 void avancer(ListeCh *l)
 {
-    if(l->courant->suivant != NULL)
+    if(l->courant != NULL)
         l->courant = l->courant->suivant;
+
 }
 
 int estDebut(ListeCh l)
 {
+    //printf(" -> Test Debut \n");
     return (l.debut == l.courant);
 }
+
 int estFin(ListeCh l)
 {
-    return (l.fin == l.courant);
+    // printf(" -> Test Fin \n");
+    return (l.courant == NULL);
 }
